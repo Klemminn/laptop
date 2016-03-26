@@ -1,0 +1,38 @@
+.btn {
+    border-radius: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Droid Serif', Georgia, Times, serif;
+}
+p, div, td {
+    font-family: 'Droid Sans', Helvetica, Arial, sans-serif;
+}
+
+body {
+    background: url(../images/crossword.png) repeat 0 0;
+}
+.jumbotron {
+    background-color:transparent !important;
+}
+
+.noUi-connect {
+    background: #32C0F0;
+}
+
+.darken {
+    background: rgba(54, 25, 25, .07);
+    margin-top:50px;
+}
+
+.welcome {
+    margin: 45px auto 45px auto;
+}
+
+.welcome h1 {
+    font-size: 4em;
+}
+
+.welcome p {
+    font-size: 2em;
+}

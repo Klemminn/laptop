@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="css/nouislider.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="http://fonts.googleapis.com/css?family=Droid+Serif" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Droid+Sans" rel="stylesheet" type="text/css">
     <!--<link rel="stylesheet" href="css/font-awesome.min.css">-->
 
     <script src="js/jquery-2.2.1.min.js"></script>
@@ -33,37 +36,24 @@
         th {
             cursor: pointer;
         }
-        button {
-            margin-top: 0px;
-        }
     </style>
 
 </head>
 <body style="width: auto">
 
-<nav class="navbar navbar-inverse navbar-fixed-top">
+<nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">Laptop.is</a>
+            <a class="navbar-brand">Laptop.is</a>
         </div>
     </div>
 </nav>
 
-<!-- Main jumbotron for a primary marketing message or call to action -->
-<div class="jumbotron">
-    <div class="container">
+<div ng-controller="searchCtrl" class="container darken">
+    <div class="welcome">
         <h1>Velkomin!</h1>
-        <p>Laptop.is býður þér að finna með einföldum hætti þá fartölvu sem hentar þér.  Notaðu síuna hér fyrir neðan til að finna þær tölvur sem uppfylla þínar kröfur.</p>
+        <p>Laptop.is hjálpar þér að finna hina fullkomnu fartölvu!</p>
     </div>
-</div>
-
-<div ng-controller="searchCtrl" class="container">
     <div class="row">
         <div class="col-md-12">
             <h4 ng-click="toggleCollapse('#byVendor')" class="toCollapse">Framleiðandi</h4>
@@ -183,13 +173,13 @@
             <h4 ng-click="toggleCollapse('#byRam')" class="toCollapse">Vinnsluminni</h4>
             <div id="byRam" class="row collapse in">
                 <div class="col-md-2 col-xs-3">
-                    <span id="ram-lower"></span>
+                    <span id="ram-lower" class="pull-left"></span>
                 </div>
                 <div class="col-md-8 col-xs-6">
                     <div id="ramSlider"></div>
                 </div>
                 <div class="col-md-2 col-xs-3">
-                    <span id="ram-higher"></span>
+                    <span id="ram-higher" class="pull-right"></span>
                 </div>
             </div>
         </div>
@@ -246,7 +236,7 @@
                 <tr ng-repeat="laptop in filteredLaptops = (laptops | searchFilter) | orderBy:searchSort | limitTo:resultLimit">
                     <td ng-click="showLaptop(laptop)" style="cursor:pointer"><img ng-if="laptop.image_exists" height="30px" ng-src="{{getImageLink(laptop,'small')}}"></td>
                     <td><a href="{{laptop.url}}" target="_blank">{{laptop.description | limitText:35}}</a></td>
-                    <td>{{laptop.display_size}}"</td>
+                    <td><div>{{laptop.display_size}}"</div></td>
                     <td>{{laptop.display_resolution}}</td>
                     <td>{{laptop.cpu_vendor}} {{laptop.cpu_model}}</td>
                     <td>{{laptop.ram}}GB</td>

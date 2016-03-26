@@ -62,7 +62,8 @@ laptops.controller("searchCtrl", function($scope,$rootScope,$timeout) {
     var hddRange = {'min': $rootScope.hdd_capacity[0][0], 'max': $rootScope.hdd_capacity[$rootScope.hdd_capacity.length-1][0]};
     var percent;
     for (var i = 1; i < $rootScope.hdd_capacity.length-1; i++) {
-        percent = Math.round(($rootScope.hdd_capacity[i][0]/hddRange.max)*100) + "%";
+        //percent = Math.round(($rootScope.hdd_capacity[i][0]/hddRange.max)*100) + "%";
+        percent = Math.round((i/$rootScope.hdd_capacity.length)*100) + "%";
         hddRange[percent] = $rootScope.hdd_capacity[i][0];
     }
     noUiSlider.create(hddSlider, {
@@ -88,7 +89,8 @@ laptops.controller("searchCtrl", function($scope,$rootScope,$timeout) {
     var ramSlider = document.getElementById('ramSlider');
     var ramRange = {'min': $rootScope.ram_sizes[0][0], 'max': $rootScope.ram_sizes[$rootScope.ram_sizes.length-1][0]};
     for (var i = 1; i < $rootScope.ram_sizes.length-1; i++) {
-        percent = Math.round(($rootScope.ram_sizes[i][0]/ramRange.max)*100) + "%";
+        //percent = Math.round(($rootScope.ram_sizes[i][0]/ramRange.max)*100) + "%";
+        percent = Math.round((i/$rootScope.ram_sizes.length)*100) + "%";
         ramRange[percent] = $rootScope.ram_sizes[i][0];
     }
     noUiSlider.create(ramSlider, {
