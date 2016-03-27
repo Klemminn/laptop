@@ -10,7 +10,7 @@ p, div, td, span {
 }
 
 body {
-    background: url(../images/crossword.png) repeat 0 0;
+    background: url(../images/background.png) repeat 0 0;
 }
 .jumbotron {
     background-color:transparent !important;
