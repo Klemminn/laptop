@@ -12,73 +12,19 @@ laptops.controller("searchCtrl", ['$scope','$rootScope','$timeout',
         $rootScope.selectedLaptop = $rootScope.laptops[0];
         $scope.resultLimit = 50;
 
+        // Opnar modal glugga með upplýsingum um staka fartölvu
         $scope.showLaptop = function(laptop) {
             laptop.largeImage = $scope.getImageLink(laptop,'large');
             laptop.disk = $scope.getDiskText(laptop.hdd_capacity, laptop.hdd_type);
             $rootScope.openModal('laptopModal','lg',laptop);
         };
 
-        var infoForModals = {
-            "vendor": {
-                "title": "Framleiðandi",
-                "body": "<div>Framleiðandi tölvunnar skiptir helst máli þegar kemur að bilanatíðni og þjónustu við tölvuna þegar eitthvað kemur upp á.<br/>" +
-                "<br/>Sumir framleiðendur hafa með umboð hér á landi sem annast viðgerðir og þá er er viðgerðartími almennt styttri, þar sem ekki þarf að " +
-                "senda tölvuna úr landi í ábyrgðarviðgerð og/eða bíða lengi eftir varahlutum. <br/>" +
-                "<br/>Einnig ber að nefna að sumir framleiðendur bjóða alheimsábyrgð, þannig að ef ske kynni að tölvan bilaði erlendis, þá væri hægt að sækja þjónustu þar.</div>"
-            },
-            "size": {
-                "title": "Skjástærð",
-                "body": "<div>Skjástærð segir til um hversu stór skjárinn er, frá horni í horn.  Skjástærðin á myndinni hér að neðan er því 15.4\"<br/>" +
-                "Almennt séð helst stærð og þyngd tölvunnar í hendur við skjástærðina.</div>" +
-                "<br/><center><img src='images/screensize.png'></center>"
-            },
-            "resolution": {
-                "title": "Upplausn",
-                "body": "<div>Upplausn segir til um hversu margir pixlar eru á skjánum.  Því fleiri pixlar, því meira er vinnuplássið á skjánum.<br/>" +
-                "Fyrri talan segir til um fjölda pixla lárétt yfir skjáinn og seinni talan lóðrétt.<br/>" +
-                "<br/>Tökum sem dæmi skjá með upplausn 1920x1080, hann hefur 1920 pixla lárétt yfir skjáinn og 1080 pixla lóðrétt.<br/>Þessi upplausn er betur þekkt sem \"fullHD\"</div>"
-            },
-            "cpu": {
-                "title": "Örgjörvi",
-                "body": "<div>Örgjörvi segir til um hráa reiknigetu tölvunar.  Hann hefur því áhrif á hvernig notkun tölvan ræður við. " +
-                "<br/><br/>Flestir örgjörvar í fartölvum sem seldar eru í dag duga fyrir venjulega heimilisnotkun, þ.e. vefráp og skóla- eða skrifstofuvinnslu.<br/>" +
-                "Það er því óþarfi að fjárfesta í tölvum með mjög öflugum örgjörva ef ekki á að nota tölvuna mikið í mjög þunga vinnslu, s.s. hljóð- og myndvinnslu.<br/>" +
-                "<br/>Almennt kæmi betur út þegar kaupa á tölvu fyrir heimilis- eða skólanotkun að leggja meiri áherslu á að tölvan sé með SSD disk eða mikið vinnsluminni," +
-                " þar sem þeir þættir hafa talsvert meiri áhrif á notendaupplifun þeirra.</div>"
-            },
-            "disk": {
-                "title": "Harður diskur",
-                "body": "<div>Diskur tölvunar er það geymslurými sem tölvan hefur.<br/>" +
-                "Á síðustu árum hafa verið að ryðja sér til rúms svo kallaðir Solid State Diskar (SSD), sem eru í raun ekki harðir diskar heldur flash minni.<br/>" +
-                "Slíkir diskar eru margfalt hraðari og gera tölvuna því liprari og skemmtilegri í notkun.  Hins vegar eru þeir einnig dýrari og oft er hafa þeir takmarkað geymslurými.<br/>" +
-                "Því hafa einnig komið fram SSHD diskar, sem eru hybrid, þ.e. eru í grunninn hefðbundnir harðir diskar, en þó með flash minni sem heldur utan um mest notuðu gögnin.  " +
-                "Slíkir diskar brúa því að einhverju leiti bilið milli HDD og SSD, bjóða upp á stærðina sem HDD býður og smá hraðaaukningu með flash minninu.<br/><br/>" +
-                "<b>SSD diskar hafa gífurleg áhrif á notendaupplifun, þar sem þeir hraða flestum aðgerðum.</b></div>"
-            },
-            "ram": {
-                "title": "Vinnsluminni",
-                "body": "<div>Vinnsluminni tölvunar segir til um hversu mikið magn af upplýsingum tölvan getur haldið utan um, án þess að þurfa að sækja þær af disk.<br/>" +
-                "Þegar vinnsluminni fyllist, þá skrifar tölvan upplýsingarnar á harðan disk. Vinnsluminnið er töluvert hraðara heldur en diskur tölvunnar, " +
-                "og því er ráðlegt að stærð vinnsluminnis sé í samræmi við það sem tölvan á að vera notuð í.<br/>" +
-                "Ef notandi vinnur með þung forrit, er almennt með mörg forrit opin í einu, eða mjög marga glugga í vafra, þá þarf hann talsvert vinnsluminni.<br/><br/>" +
-                "Við kaup á tölvu er það <b>magn</b> vinnsluminnis sem skiptir máli, <b>ekki hraði þess</b>.  MHz tölur vinnsluminnis er eitthvað sem þarf ekki að hafa í huga við kaup á fartölvu, " +
-                "þar sem hraðamunurinn er mögulega mælanlegur en ekki sjáanlegur.</div>"
-            },
-            "gpu": {
-                "title": "Skjákort",
-                "body": "<div>Skjákort/skjástýring fartölvu hefur áhrif á grafíska vinnslugetu tölvunar.<br/>" +
-                "Skjákortið er því helst mikilvægt fyrir þá sem eru í þungri grafískri vinnslu, s.s. þrívíddarteikningu eða tölvuleikjum.<br/>" +
-                "<br/>Erfitt er að sjá út frá nöfnunum á skjástýringunum hversu öflugar þær eru, því er helst hægt að benda á raunverulega prófanir á þeim, svo sem hjá" +
-                " <a href='http://www.notebookcheck.net/Mobile-Graphics-Cards-Benchmark-List.844.0.html' target='_blank'>NotebookCheck.net</a></div>"
-            }
-        };
-
-
-
+        // Opnar modal glugga með upplýsingum um ákveðinn eiginleika, s.s. skjástærð, örgjörva o.s.frv.
         $scope.getInfo = function (item) {
             $rootScope.openModal('propertyInfoModal','lg',infoForModals[item]);
         };
 
+        // Breytir röðun í töflu
         $scope.changeSort = function(sortBy) {
             if (sortBy == "gpu") {
                 $scope.searchSort = $scope.searchSort[0] == "gpu_vendor" ? ["-gpu_vendor", "gpu_model"] : ["gpu_vendor", "gpu_model"]
@@ -87,6 +33,7 @@ laptops.controller("searchCtrl", ['$scope','$rootScope','$timeout',
             }
         };
 
+        // Notað til að auðkenna hvaða dálk er raðað eftir í töflu
         $scope.checkSort = function(column) {
             if ($scope.searchSort[0].indexOf(column) > -1) {
                 return $scope.searchSort[0].indexOf("-") > -1 ? 1 : -1;
@@ -94,14 +41,17 @@ laptops.controller("searchCtrl", ['$scope','$rootScope','$timeout',
             return false;
         };
 
+        // Umbreytir GB í TB ef þess er þörf
         $scope.getDiskText = function(capacity, type) {
             return ((capacity >= 1000) ? capacity/1000 + "TB " : capacity + "GB ") + type;
         };
 
+        // Skilar link á mynd
         $scope.getImageLink = function(laptop, size) {
             return "images/laptops/" + laptop.id + size + ".jpeg";
         };
 
+        // Velur- eða afvelur hnapp
         $scope.toggle = function(item, cpuVendor) {
             if (item == 'intel' || item == 'amd') {
                 $rootScope[item].toggled = $rootScope[item].toggled != true;
@@ -116,6 +66,7 @@ laptops.controller("searchCtrl", ['$scope','$rootScope','$timeout',
             }
         };
 
+        // Opnar eða lokar röð
         $scope.toggleCollapse = function (element) {
             //$(element).collapse("toggle");
         };
@@ -237,4 +188,60 @@ laptops.controller("searchCtrl", ['$scope','$rootScope','$timeout',
             });
             priceLabels[handle].value = roundThousand(values[handle],'round');
         });
+
+        // Texti fyrir modal glugga v. eiginleika.
+        var infoForModals = {
+            "vendor": {
+                "title": "Framleiðandi",
+                "body": "<div>Framleiðandi tölvunnar skiptir helst máli þegar kemur að bilanatíðni og þjónustu við tölvuna þegar eitthvað kemur upp á.<br/>" +
+                "<br/>Sumir framleiðendur hafa með umboð hér á landi sem annast viðgerðir og þá er er viðgerðartími almennt styttri, þar sem ekki þarf að " +
+                "senda tölvuna úr landi í ábyrgðarviðgerð og/eða bíða lengi eftir varahlutum. <br/>" +
+                "<br/>Einnig ber að nefna að sumir framleiðendur bjóða alheimsábyrgð, þannig að ef ske kynni að tölvan bilaði erlendis, þá væri hægt að sækja þjónustu þar.</div>"
+            },
+            "size": {
+                "title": "Skjástærð",
+                "body": "<div>Skjástærð segir til um hversu stór skjárinn er, frá horni í horn.  Skjástærðin á myndinni hér að neðan er því 15.4\"<br/>" +
+                "Almennt séð helst stærð og þyngd tölvunnar í hendur við skjástærðina.</div>" +
+                "<br/><center><img src='images/screensize.png'></center>"
+            },
+            "resolution": {
+                "title": "Upplausn",
+                "body": "<div>Upplausn segir til um hversu margir pixlar eru á skjánum.  Því fleiri pixlar, því meira er vinnuplássið á skjánum.<br/>" +
+                "Fyrri talan segir til um fjölda pixla lárétt yfir skjáinn og seinni talan lóðrétt.<br/>" +
+                "<br/>Tökum sem dæmi skjá með upplausn 1920x1080, hann hefur 1920 pixla lárétt yfir skjáinn og 1080 pixla lóðrétt.<br/>Þessi upplausn er betur þekkt sem \"fullHD\"</div>"
+            },
+            "cpu": {
+                "title": "Örgjörvi",
+                "body": "<div>Örgjörvi segir til um hráa reiknigetu tölvunar.  Hann hefur því áhrif á hvernig notkun tölvan ræður við. " +
+                "<br/><br/>Flestir örgjörvar í fartölvum sem seldar eru í dag duga fyrir venjulega heimilisnotkun, þ.e. vefráp og skóla- eða skrifstofuvinnslu.<br/>" +
+                "Það er því óþarfi að fjárfesta í tölvum með mjög öflugum örgjörva ef ekki á að nota tölvuna mikið í mjög þunga vinnslu, s.s. hljóð- og myndvinnslu.<br/>" +
+                "<br/>Almennt kæmi betur út þegar kaupa á tölvu fyrir heimilis- eða skólanotkun að leggja meiri áherslu á að tölvan sé með SSD disk eða mikið vinnsluminni," +
+                " þar sem þeir þættir hafa talsvert meiri áhrif á notendaupplifun þeirra.</div>"
+            },
+            "disk": {
+                "title": "Harður diskur",
+                "body": "<div>Diskur tölvunar er það geymslurými sem tölvan hefur.<br/>" +
+                "Á síðustu árum hafa verið að ryðja sér til rúms svo kallaðir Solid State Diskar (SSD), sem eru í raun ekki harðir diskar heldur flash minni.<br/>" +
+                "Slíkir diskar eru margfalt hraðari og gera tölvuna því liprari og skemmtilegri í notkun.  Hins vegar eru þeir einnig dýrari og oft er hafa þeir takmarkað geymslurými.<br/>" +
+                "Því hafa einnig komið fram SSHD diskar, sem eru hybrid, þ.e. eru í grunninn hefðbundnir harðir diskar, en þó með flash minni sem heldur utan um mest notuðu gögnin.  " +
+                "Slíkir diskar brúa því að einhverju leiti bilið milli HDD og SSD, bjóða upp á stærðina sem HDD býður og smá hraðaaukningu með flash minninu.<br/><br/>" +
+                "<b>SSD diskar hafa gífurleg áhrif á notendaupplifun, þar sem þeir hraða flestum aðgerðum.</b></div>"
+            },
+            "ram": {
+                "title": "Vinnsluminni",
+                "body": "<div>Vinnsluminni tölvunar segir til um hversu mikið magn af upplýsingum tölvan getur haldið utan um, án þess að þurfa að sækja þær af disk.<br/>" +
+                "Þegar vinnsluminni fyllist, þá skrifar tölvan upplýsingarnar á harðan disk. Vinnsluminnið er töluvert hraðara heldur en diskur tölvunnar, " +
+                "og því er ráðlegt að stærð vinnsluminnis sé í samræmi við það sem tölvan á að vera notuð í.<br/>" +
+                "Ef notandi vinnur með þung forrit, er almennt með mörg forrit opin í einu, eða mjög marga glugga í vafra, þá þarf hann talsvert vinnsluminni.<br/><br/>" +
+                "Við kaup á tölvu er það <b>magn</b> vinnsluminnis sem skiptir máli, <b>ekki hraði þess</b>.  MHz tölur vinnsluminnis er eitthvað sem þarf ekki að hafa í huga við kaup á fartölvu, " +
+                "þar sem hraðamunurinn er mögulega mælanlegur en ekki sjáanlegur.</div>"
+            },
+            "gpu": {
+                "title": "Skjákort",
+                "body": "<div>Skjákort/skjástýring fartölvu hefur áhrif á grafíska vinnslugetu tölvunar.<br/>" +
+                "Skjákortið er því helst mikilvægt fyrir þá sem eru í þungri grafískri vinnslu, s.s. þrívíddarteikningu eða tölvuleikjum.<br/>" +
+                "<br/>Erfitt er að sjá út frá nöfnunum á skjástýringunum hversu öflugar þær eru, því er helst hægt að benda á raunverulega prófanir á þeim, svo sem hjá" +
+                " <a href='http://www.notebookcheck.net/Mobile-Graphics-Cards-Benchmark-List.844.0.html' target='_blank'>NotebookCheck.net</a></div>"
+            }
+        };
     }]);
