@@ -18,6 +18,19 @@ laptops.controller("searchCtrl", ['$scope','$rootScope','$timeout',
             });
         };
 
+        $scope.clearFilter = function() {
+            var allCategories = ['amdCpuTypes','intelCpuTypes','brands','stores','sizes','hdd_types','gpu_vendors','display_resolutions'];
+            for (var i = 0; i < allCategories.length; i++) {
+                for (var j = 0; j < $rootScope[allCategories[i]].length; j++) {
+                    $rootScope[allCategories[i]][j].toggled = false;
+                }
+            }
+            resolutionSlider.noUiSlider.set([0,$rootScope.display_resolutions.length-1]);
+            ramSlider.noUiSlider.set([ramRange.min, ramRange.max]);
+            hddSlider.noUiSlider.set([hddRange.min, hddRange.max]);
+            priceSlider.noUiSlider.set([priceRange.min, priceRange.max]);
+        };
+
 
         // Opnar modal glugga með upplýsingum um staka fartölvu
         $scope.showLaptop = function(laptop) {

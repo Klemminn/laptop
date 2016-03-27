@@ -1,7 +1,6 @@
 <div class="container darken">
     <div class="welcome">
-        <h1>Leitarvélin</h1>
-        <p>Laptop.is hjálpar þér að finna fartölvuna!</p>
+        <h1>Laptop.is hjálpar þér að finna fartölvuna!</h1>
     </div>
     <div class="row">
         <div class="col-md-12">
@@ -175,6 +174,9 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="pull-left">
+        <button class="btn btn-primary" ng-click="clearFilter()" style="margin-top: 15px">Hreinsa síu</button>
     </div>
     <div class="pull-right">
         Sýni <input ng-model="resultLimit" type="number" class="form-control" style="width: 5em; display: inline-block; margin: 15px 0 0 0" min="1"> af {{filteredLaptops.length}} niðurstöðum
