@@ -24,12 +24,18 @@ laptops.filter('searchFilter', function($rootScope) {
     return function(input) {
         if (input) {
             var filtered = [];
-            var toggledBrands = [];
             var add, item;
             var cpuTypes = $rootScope.intelCpuTypes.concat($rootScope.amdCpuTypes);
+            var toggledBrands = [];
             for (var i = 0; i < $rootScope.brands.length; i++) {
                 if ($rootScope.brands[i].toggled) {
                     toggledBrands.push($rootScope.brands[i][0])
+                }
+            }
+            var toggledStores = [];
+            for (var i = 0; i < $rootScope.brands.length; i++) {
+                if ($rootScope.stores[i].toggled) {
+                    toggledStores.push($rootScope.stores[i][0])
                 }
             }
             var toggledSizes = [];
@@ -66,6 +72,8 @@ laptops.filter('searchFilter', function($rootScope) {
                 }
                 // Leitum eftir framleiðanda
                 add = (toggledBrands.length == 0 || $.inArray(item.brand, toggledBrands) > -1);
+                if (add == false) continue;
+                add = (toggledStores.length == 0 || $.inArray(item.store, toggledStores) > -1);
                 if (add == false) continue;
                 // Leitum eftir skjástærð
                 if (toggledSizes.length > 0) {

@@ -5,6 +5,21 @@
     </div>
     <div class="row">
         <div class="col-md-12">
+            <h4 ng-click="toggleCollapse('#byStore')" class="toCollapse">Verslun</h4>
+            <div id="byStore" class="row collapse in">
+                <div class="col-md-12">
+                    <button class="btn btn-default" style="display: inline-block; width: 7em; margin: auto 1em 1em auto"
+                            ng-repeat="store in stores"
+                            ng-class="{'active toggled': store.toggled}"
+                            ng-click="toggle(store)">
+                        {{store[0]}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
             <h4 ng-click="toggleCollapse('#byVendor')" class="toCollapse">Framleiðandi<i class="fa fa-info-circle" ng-click="getInfo('vendor')"></i></h4>
             <div id="byVendor" class="row collapse in">
                 <div class="col-md-12">

@@ -186,7 +186,7 @@ laptops.controller("searchCtrl", ['$scope','$rootScope','$timeout',
                 $rootScope.priceLower = roundThousand(values[0],'round');
                 $rootScope.priceHigher = roundThousand(values[1],'round');
             });
-            priceLabels[handle].value = roundThousand(values[handle],'round');
+            priceLabels[handle].value = roundThousand(values[handle],'round').toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
         });
 
         // Texti fyrir modal glugga v. eiginleika.
