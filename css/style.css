@@ -5,7 +5,7 @@
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Droid Serif', Georgia, Times, serif;
 }
-p, div, td {
+p, div, td, span {
     font-family: 'Droid Sans', Helvetica, Arial, sans-serif;
 }
 
@@ -35,4 +35,14 @@ body {
 
 .welcome p {
     font-size: 2em;
+}
+
+#laptopModalBody .col-md-3:first-child, .col-xs-6:first-child {
+    font-weight: bold;
+}
+
+#laptopModalBody
+
+#laptopModalBody .row:last-child {
+    font-size: 1.3em;
 }

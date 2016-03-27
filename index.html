@@ -17,13 +17,18 @@
 
     <script src="js/jquery-2.2.1.min.js"></script>
     <script src="js/angular.min.js"></script>
+    <script src="js/angular-route.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-
-    <script src="js/laptopsApp.js"></script>
-    <script src="js/database.js"></script>
-    <script src="js/searchCtrl.js"></script>
-    <script src="js/headerCtrl.js"></script>
+    <script src="js/ui-bootstrap-tpls-1.2.5.min.js"></script>
     <script src="js/nouislider.min.js"></script>
+
+    <script src="app/js/laptopsApp.js"></script>
+    <script src="app/js/database.js"></script>
+    <script src="app/js/filters.js"></script>
+
+    <script src="app/js/searchCtrl.js"></script>
+    <script src="app/js/headerCtrl.js"></script>
+
 
 
     <style>
@@ -49,228 +54,19 @@
     </div>
 </nav>
 
-<div ng-controller="searchCtrl" class="container darken">
-    <div class="welcome">
-        <h1>Velkomin!</h1>
-        <p>Laptop.is hjálpar þér að finna hina fullkomnu fartölvu!</p>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <h4 ng-click="toggleCollapse('#byVendor')" class="toCollapse">Framleiðandi</h4>
-            <div id="byVendor" class="row collapse in">
-                <div class="col-md-12">
-                    <button class="btn btn-default" style="display: inline-block; width: 7em; margin-right: 1em"
-                            ng-repeat="brand in brands"
-                            ng-class="{'active toggled': brand.toggled}"
-                            ng-click="toggle(brand)">
-                        {{brand[0]}}
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-            <h4 ng-click="toggleCollapse('#bySize')" class="toCollapse">Skjástærð</h4>
-            <div id="bySize" class="row collapse in">
-                <div ng-repeat="size in sizes" class="col-md-2 col-xs-4">
-                    <button class="btn btn-default" style="display: inline-block; width: 100%"
-                            ng-class="{'active toggled': size.toggled}"
-                            ng-click="toggle(size)">
-                        {{size[0]}}"
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <h4 ng-click="toggleCollapse('#byResolution')" class="toCollapse">Upplausn</h4>
-            <div id="byResolution" class="row collapse in">
-                <div class="col-md-2 col-xs-3">
-                    <span id="resolution-lower" class="pull-left"></span>
-                </div>
-                <div class="col-md-8 col-xs-6">
-                    <div id="resolutionSlider"></div>
-                </div>
-                <div class="col-md-2 col-xs-3">
-                    <span id="resolution-higher" class="pull-right"></span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <h4 ng-click="toggleCollapse('.byCPU')" class="toCollapse">Örgjörvi</h4>
-            <div class="row collapse in byCPU">
-                <div class="col-md-1 col-xs-12">
-                    <button class="btn btn-default" style="display: inline-block; width: 100%; margin-right: 1em"
-                            ng-class="{'active toggled': intel.toggled}"
-                            ng-click="toggle('intel')">
-                        Intel
-                    </button>
-                </div>
-                <div class="col-md-1"></div>
-                <div ng-repeat="type in intelCpuTypes" class="col-md-1 col-xs-4">
-                    <button class="btn btn-default pull-right" style="display: inline-block; width: 100%; padding-left: 8px;"
-                            ng-class="{'active toggled': type.toggled}"
-                            ng-click="toggle(type, 'intel')">
-                        {{type[0]}}
-                    </button>
-                </div>
-                <div class="col-md-1"></div>
-            </div>
-            <div class="row collapse in byCPU" style="margin-top:20px">
-                <div class="col-md-1 col-xs-12">
-                    <button class="btn btn-default" style="display: inline-block; width: 100%; margin-right: 1em"
-                            ng-class="{'active toggled': amd.toggled}"
-                            ng-click="toggle('amd')">
-                        AMD
-                    </button>
-                </div>
-                <div class="col-md-1"></div>
-                <div ng-repeat="type in amdCpuTypes" class="col-md-1 col-xs-4">
-                    <button class="btn btn-default pull-right" style="display: inline-block; width: 100%"
-                            ng-class="{'active toggled': type.toggled}"
-                            ng-click="toggle(type, 'amd')">
-                        {{type[0]}}
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <h4 ng-click="toggleCollapse('.byHDD')" class="toCollapse">Harður diskur</h4>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="row collapse in byHDD">
-                        <div class="col-md-2 col-xs-3">
-                            <span id="hdd-lower" class="pull-left"></span>
-                        </div>
-                        <div class="col-md-8 col-xs-6">
-                            <div id="hddSlider"></div>
-                        </div>
-                        <div class="col-md-2 cols-xs-3">
-                            <span id="hdd-higher" class="pull-right"></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="row collapse in byHDD">
-                        <div ng-repeat="type in hdd_types" class="col-md-4 col-xs-4">
-                            <button class="btn btn-default" style="display: inline-block; width: 100%"
-                                    ng-class="{'active toggled': type.toggled}"
-                                    ng-click="toggle(type)">
-                                {{type[0]}}
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-            <h4 ng-click="toggleCollapse('#byRam')" class="toCollapse">Vinnsluminni</h4>
-            <div id="byRam" class="row collapse in">
-                <div class="col-md-2 col-xs-3">
-                    <span id="ram-lower" class="pull-left"></span>
-                </div>
-                <div class="col-md-8 col-xs-6">
-                    <div id="ramSlider"></div>
-                </div>
-                <div class="col-md-2 col-xs-3">
-                    <span id="ram-higher" class="pull-right"></span>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <h4 ng-click="toggleCollapse('#byGpu')" class="toCollapse">Skjákort</h4>
-            <div class="row">
-                <div ng-repeat="vendor in gpu_vendors" class="col-md-4 col-xs-4">
-                    <button class="btn btn-default" style="display: inline-block; width: 100%"
-                            ng-class="{'active toggled': vendor.toggled}"
-                            ng-click="toggle(vendor)">
-                        {{vendor[0]}}
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <h4 ng-click="toggleCollapse('#byPrice')" class="toCollapse">Sía eftir verði</h4></a>
-            <div id="byPrice" class="row collapse in">
-                <div class="col-md-2 col-xs-3">
-                    <input class="form-control" type="text" id="price-lower">
-                </div>
-                <div class="col-md-8 col-xs-6">
-                    <div id="priceSlider" style="margin-top:7px"></div>
-                </div>
-                <div class="col-md-2 col-xs-3">
-                    <input class="form-control" type="text" id="price-higher">
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="pull-right">
-            Sýni <input ng-model="resultLimit" type="number" class="form-control" style="width: 5em; display: inline-block; margin: 15px 0 0 0" min="1" max="{{filteredLaptops.length}}"> af {{filteredLaptops.length}} niðurstöðum
-    </div>
-    <div class="row" style="margin-top: 30px; min-height: 200px">
-        <div class="col-md-12">
-            <table class="table">
-                <thead>
-                <tr>
-                    <th></th>
-                    <th ng-click="changeSort('description')" ng-class="{underline: checkSort('description')}">Lýsing</th>
-                    <th ng-click="changeSort('display_size')" ng-class="{underline: checkSort('display_size')}">Skjástærð</th>
-                    <th ng-click="changeSort('display_resolution')" ng-class="{underline: checkSort('display_resolution')}">Upplausn</th>
-                    <th ng-click="changeSort('cpu_vendor')" ng-class="{underline: checkSort('cpu_vendor')}">Örgjörvi</th>
-                    <th ng-click="changeSort('ram')" ng-class="{underline: checkSort('ram')}">Minni</th>
-                    <th ng-click="changeSort('hdd_capacity')" ng-class="{underline: checkSort('hdd_capacity')}">Diskur</th>
-                    <th ng-click="changeSort('gpu')" ng-class="{underline: checkSort('gpu_vendor')}">Skjákort</th>
-                    <th ng-click="changeSort('store')" ng-class="{underline: checkSort('store')}">Verslun</th>
-                    <th ng-click="changeSort('price')" ng-class="{underline: checkSort('price')}">Verð</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr ng-repeat="laptop in filteredLaptops = (laptops | searchFilter) | orderBy:searchSort | limitTo:resultLimit">
-                    <td ng-click="showLaptop(laptop)" style="cursor:pointer"><img ng-if="laptop.image_exists" height="30px" ng-src="{{getImageLink(laptop,'small')}}"></td>
-                    <td><a href="{{laptop.url}}" target="_blank">{{laptop.description | limitText:35}}</a></td>
-                    <td><div>{{laptop.display_size}}"</div></td>
-                    <td>{{laptop.display_resolution}}</td>
-                    <td>{{laptop.cpu_vendor}} {{laptop.cpu_model}}</td>
-                    <td>{{laptop.ram}}GB</td>
-                    <td>{{getDiskText(laptop.hdd_capacity, laptop.hdd_type)}}</td>
-                    <td>{{laptop.gpu_vendor}} {{laptop.gpu_model}}</td>
-                    <td>{{laptop.store}}</td>
-                    <td>{{laptop.price | thousandSeparator}}kr.</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <div id="imageModal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-            <!-- Modal content-->
-            <div class="modal-content" style="display: table">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">{{selectedLaptop.description}}</h4>
-                </div>
-                <div class="modal-body">
-                    <center>
-                        <img ng-src="{{getImageLink(selectedLaptop,'large')}}">
-                    </center>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Loka</button>
-                </div>
-            </div>
+<div class="row" id="page-main-body">
+    <ng-view></ng-view>
+</div>
+<div id="modals" class="modal fade" role="dialog">
+
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content" style="display: table">
 
         </div>
     </div>
 </div>
-<hr>
+
 
 <!--<footer>
     <p>&copy; {{thisYear}} Laptops.is</p>
