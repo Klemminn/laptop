@@ -62,7 +62,6 @@ laptops.filter('searchFilter', function($rootScope) {
                     toggledGpuVendors.push($rootScope.gpu_vendors[i][0]);
                 }
             }
-            console.log(toggledStores);
             for (var i = 0; i < input.length; i++) {
                 item = input[i];
                 for (var j = 0; j < $rootScope.display_resolutions.length; j++) {
