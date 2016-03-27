@@ -46,3 +46,11 @@ body {
 #laptopModalBody .row:last-child {
     font-size: 1.3em;
 }
+
+.fa-info-circle {
+    font-size: 0.7em !important;
+    vertical-align: top;
+    padding-left: 0.3em;
+    color: grey;
+    cursor: pointer;
+}

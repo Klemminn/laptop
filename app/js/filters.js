@@ -14,6 +14,12 @@ laptops.filter('limitText', function() {
     }
 });
 
+laptops.filter('getHtml', function($sce) {
+    return function(input) {
+        return $sce.trustAsHtml(input);
+    }
+});
+
 laptops.filter('searchFilter', function($rootScope) {
     return function(input) {
         if (input) {
