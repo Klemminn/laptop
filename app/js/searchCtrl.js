@@ -12,6 +12,13 @@ laptops.controller("searchCtrl", ['$scope','$rootScope','$timeout',
         $rootScope.selectedLaptop = $rootScope.laptops[0];
         $scope.resultLimit = 50;
 
+        $scope.trackOutboundLink = function(url) {
+            ga('send', 'event', 'outbound', 'click', url, {
+                'transport': 'beacon'
+            });
+        };
+
+
         // Opnar modal glugga með upplýsingum um staka fartölvu
         $scope.showLaptop = function(laptop) {
             laptop.largeImage = $scope.getImageLink(laptop,'large');
