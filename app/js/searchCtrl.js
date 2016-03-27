@@ -194,7 +194,7 @@ laptops.controller("searchCtrl", ['$scope','$rootScope','$timeout',
             "vendor": {
                 "title": "Framleiðandi",
                 "body": "<div>Framleiðandi tölvunnar skiptir helst máli þegar kemur að bilanatíðni og þjónustu við tölvuna þegar eitthvað kemur upp á.<br/>" +
-                "<br/>Sumir framleiðendur hafa með umboð hér á landi sem annast viðgerðir og þá er er viðgerðartími almennt styttri, þar sem ekki þarf að " +
+                "<br/>Sumir framleiðendur hafa umboð hér á landi sem annast viðgerðir og þá er er viðgerðartími almennt styttri, þar sem ekki þarf að " +
                 "senda tölvuna úr landi í ábyrgðarviðgerð og/eða bíða lengi eftir varahlutum. <br/>" +
                 "<br/>Einnig ber að nefna að sumir framleiðendur bjóða alheimsábyrgð, þannig að ef ske kynni að tölvan bilaði erlendis, þá væri hægt að sækja þjónustu þar.</div>"
             },
