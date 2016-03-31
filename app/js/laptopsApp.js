@@ -29,7 +29,12 @@ laptops.config(['$routeProvider',
             when('/search', {
                 templateUrl: 'app/views/search.html',
                 controller: 'searchCtrl'
-            }).otherwise({
+            }).
+            when('/search2', {
+                templateUrl: 'app/views/search2.html',
+                controller: 'searchCtrl'
+            }).
+            otherwise({
                 redirectTo: '/search'
             });
     }]);
