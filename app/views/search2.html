@@ -1,6 +1,6 @@
-<div class="container-fluid darken">
-    <div>
-        <div class="col-md-4" style="margin-top:20px">
+<div class="container-fluid">
+    <div class="row" style="overflow: hidden">
+        <div class="col-md-4 darken" style="margin-top:70px; margin-bottom: -99999px; padding-bottom: 99999px;">
             <div class="row">
                 <div class="col-md-12">
                     <h4 ng-click="toggleCollapse('#byStore')" class="toCollapse">Verslun</h4>
@@ -103,6 +103,14 @@
             </div>
             <div class="row">
                 <div class="col-md-6">
+                    <h4 ng-click="toggleCollapse('#byGpu')" class="toCollapse">Skjákort<i class="fa fa-info-circle" ng-click="getInfo('gpu')"></i></h4>
+                    <button ng-repeat="vendor in gpu_vendors" class="btn btn-default" style="display: inline-block; width: 30%; margin-right: 0.3em"
+                            ng-class="{'active toggled': vendor.toggled}"
+                            ng-click="toggle(vendor)">
+                        {{vendor[0]}}
+                    </button>
+                </div>
+                <div class="col-md-6">
                     <h4 ng-click="toggleCollapse('#byRam')" class="toCollapse">Vinnsluminni<i class="fa fa-info-circle" ng-click="getInfo('ram')"></i></h4>
                     <div id="byRam" class="row collapse in" style="padding-top: 0.4em">
                         <div class="col-md-3 col-xs-3">
@@ -115,14 +123,6 @@
                             <span id="ram-higher" class="pull-right"></span>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <h4 ng-click="toggleCollapse('#byGpu')" class="toCollapse">Skjákort<i class="fa fa-info-circle" ng-click="getInfo('gpu')"></i></h4>
-                    <button ng-repeat="vendor in gpu_vendors" class="btn btn-default" style="display: inline-block; width: 30%; margin-right: 0.3em"
-                            ng-class="{'active toggled': vendor.toggled}"
-                            ng-click="toggle(vendor)">
-                        {{vendor[0]}}
-                    </button>
                 </div>
             </div>
             <div class="row">
@@ -141,10 +141,9 @@
                     </div>
                 </div>
             </div>
-
         </div>
-        <div class="col-md-8">
-            <div style="margin-top:1em">
+        <div class="col-md-8" style="margin-top:65px;  margin-bottom: -99999px; padding-bottom: 99999px;">
+            <div>
                 <div class="pull-left">
                     <button class="btn btn-primary" ng-click="clearFilter()" style="margin-top: 15px">Hreinsa síu</button>
                 </div>
