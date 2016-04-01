@@ -9,6 +9,7 @@ laptops.controller("searchCtrl", ['$scope','$rootScope','$timeout','$routeParams
         $rootScope.thisYear = new Date().getFullYear();
         $rootScope.selectedLaptop = $rootScope.laptops[0];
         $scope.resultLimit = 50;
+        $scope.textFilter = {description: ""};
         var allCategories = ['amdCpuTypes','intelCpuTypes','brands','stores','sizes','hdd_types','gpu_vendors','display_resolutions'];
         new Clipboard('#clipboardButton');
 
@@ -39,6 +40,7 @@ laptops.controller("searchCtrl", ['$scope','$rootScope','$timeout','$routeParams
             ramSlider.noUiSlider.set([ramRange.min, ramRange.max]);
             hddSlider.noUiSlider.set([hddRange.min, hddRange.max]);
             priceSlider.noUiSlider.set([priceRange.min, priceRange.max]);
+            $scope.textFilter.description = "";
         };
 
 
@@ -251,7 +253,7 @@ laptops.controller("searchCtrl", ['$scope','$rootScope','$timeout','$routeParams
                 }
                 resolutionSlider.noUiSlider.set([indexes[0],indexes[1]]);
             }
-            if($routeParams["description"]) $rootScope.textFilter = {description: $routeParams["description"]};
+            if($routeParams["description"]) $scope.textFilter = {description: $routeParams["description"]};
         }
 
         $scope.shareOnFacebook = function() {
@@ -293,8 +295,8 @@ laptops.controller("searchCtrl", ['$scope','$rootScope','$timeout','$routeParams
                 link = link + getSymbol(link) + "resolution=" + $rootScope.display_resolutions[$rootScope.resolutionLowerIndex][0] + "," + $rootScope.display_resolutions[$rootScope.resolutionHigherIndex][0];
             }
             var textFilter = document.getElementById('textFilter').value;
-            if (textFilter.length > 0) {
-                link = link + getSymbol(link) + "description=" + textFilter;
+            if ($scope.textFilter.description.length > 0) {
+                link = link + getSymbol(link) + "description=" + $scope.textFilter.description;
             }
             $scope.longFilterLink = link;
             gapi.client.setApiKey('AIzaSyAO-_WMv7v_ZD3bJbD6ILB0vh4kMaSJjR4');
