@@ -169,7 +169,7 @@
                         <thead>
                         <tr>
                             <th></th>
-                            <th ng-click="changeSort('description')" ng-class="{underline: checkSort('description')}">Lýsing</th>
+                            <th ng-class="{underline: checkSort('description')}"><span ng-click="changeSort('description')">Lýsing</span><span style="display:inline-block;margin-left:10px"><input id="textFilter" class='form-control' style="height:1.7em" type="text" ng-model="textFilter.description"></span></th>
                             <th ng-click="changeSort('display_size')" ng-class="{underline: checkSort('display_size')}">Skjástærð</th>
                             <th ng-click="changeSort('display_resolution')" ng-class="{underline: checkSort('display_resolution')}">Upplausn</th>
                             <th ng-click="changeSort('cpu_vendor')" ng-class="{underline: checkSort('cpu_vendor')}">Örgjörvi</th>
@@ -181,7 +181,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="laptop in filteredLaptops = (laptops | searchFilter) | orderBy:searchSort | limitTo:resultLimit">
+                        <tr ng-repeat="laptop in filteredLaptops = (laptops | searchFilter) | filter:textFilter | orderBy:searchSort | limitTo:resultLimit">
                             <td ng-click="showLaptop(laptop)" style="cursor:pointer"><div style="background-color: white"><center><img ng-if="$index < resultLimit" height="30px" ng-src="{{getImageLink(laptop,'small')}}"></center></div></td>
                             <td><a href="{{laptop.url}}" ng-click="trackOutboundLink(laptop.url)" target="_blank">{{laptop.description | limitText:35}}</a></td>
                             <td><div>{{laptop.display_size}}"</div></td>

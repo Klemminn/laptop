@@ -251,6 +251,7 @@ laptops.controller("searchCtrl", ['$scope','$rootScope','$timeout','$routeParams
                 }
                 resolutionSlider.noUiSlider.set([indexes[0],indexes[1]]);
             }
+            if($routeParams["description"]) $rootScope.textFilter = {description: $routeParams["description"]};
         }
 
         $scope.shareOnFacebook = function() {
@@ -291,9 +292,11 @@ laptops.controller("searchCtrl", ['$scope','$rootScope','$timeout','$routeParams
             if ($rootScope.resolutionLowerIndex > 0 || $rootScope.resolutionHigherIndex < $rootScope.display_resolutions.length-1) {
                 link = link + getSymbol(link) + "resolution=" + $rootScope.display_resolutions[$rootScope.resolutionLowerIndex][0] + "," + $rootScope.display_resolutions[$rootScope.resolutionHigherIndex][0];
             }
-
+            var textFilter = document.getElementById('textFilter').value;
+            if (textFilter.length > 0) {
+                link = link + getSymbol(link) + "description=" + textFilter;
+            }
             $scope.longFilterLink = link;
-
             gapi.client.setApiKey('AIzaSyAO-_WMv7v_ZD3bJbD6ILB0vh4kMaSJjR4');
             gapi.client.load('urlshortener', 'v1').then(function() {
                 function useResponse(response) {
