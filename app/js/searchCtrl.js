@@ -1,25 +1,23 @@
-
-laptops.controller("searchCtrl", ['$scope','$rootScope','$timeout',
-    function($scope,$rootScope,$timeout) {
+laptops.controller("searchCtrl", ['$scope','$rootScope','$timeout','$routeParams','$http',
+    function($scope,$rootScope,$timeout,$routeParams,$http) {
         $scope.searchSort = ["price", "price"];
         $rootScope.intel = {};
         $rootScope.amd = {};
         $rootScope.sizes = [[10],[12],[13],[14],[15],[17]];
         $rootScope.intelCpuTypes = [["Atom"],["Celeron"],["Pentium"],["Core M"],["i3"],["i5"],["i7"],["Xeon"]];
         $rootScope.amdCpuTypes = [["FX"],["E2"],["E6"],["A4"],["A6"],["A8"],["A10"]];
-        $rootScope.cpuTypes = $rootScope.intelCpuTypes.concat($rootScope.amdCpuTypes);
         $rootScope.thisYear = new Date().getFullYear();
         $rootScope.selectedLaptop = $rootScope.laptops[0];
         $scope.resultLimit = 50;
+        var allCategories = ['amdCpuTypes','intelCpuTypes','brands','stores','sizes','hdd_types','gpu_vendors','display_resolutions'];
 
-        $scope.trackOutboundLink = function(url) {
-            ga('send', 'event', 'outbound', 'click', url, {
+        $scope.sendAnalyticsEvent = function(category,action,label) {
+            ga('send', 'event', category, action, label, {
                 'transport': 'beacon'
             });
         };
 
         $scope.clearFilter = function() {
-            var allCategories = ['amdCpuTypes','intelCpuTypes','brands','stores','sizes','hdd_types','gpu_vendors','display_resolutions'];
             for (var i = 0; i < allCategories.length; i++) {
                 for (var j = 0; j < $rootScope[allCategories[i]].length; j++) {
                     $rootScope[allCategories[i]][j].toggled = false;
@@ -73,6 +71,7 @@ laptops.controller("searchCtrl", ['$scope','$rootScope','$timeout',
 
         // Velur- eða afvelur hnapp
         $scope.toggle = function(item, cpuVendor) {
+            $scope.filterLink = "";
             if (item == 'intel' || item == 'amd') {
                 $rootScope[item].toggled = $rootScope[item].toggled != true;
                 for (var i = 0; i < $rootScope[item + "CpuTypes"].length; i++) {
@@ -113,6 +112,7 @@ laptops.controller("searchCtrl", ['$scope','$rootScope','$timeout',
 
         hddSlider.noUiSlider.on('update', function(values, handle) {
             $timeout(function() {
+                $scope.filterLink = "";
                 $rootScope.hddLower = values[0];
                 $rootScope.hddHigher = values[1];
             }, 1);
@@ -139,6 +139,7 @@ laptops.controller("searchCtrl", ['$scope','$rootScope','$timeout',
         ];
         ramSlider.noUiSlider.on('update', function(values, handle ) {
             $timeout(function() {
+                $scope.filterLink = "";
                 $rootScope.ramLower = values[0];
                 $rootScope.ramHigher = values[1];
             });
@@ -165,6 +166,7 @@ laptops.controller("searchCtrl", ['$scope','$rootScope','$timeout',
 
         resolutionSlider.noUiSlider.on('update', function(values, handle ) {
             $timeout(function() {
+                $scope.filterLink = "";
                 $rootScope.resolutionLowerIndex = Math.round(values[0]);
                 $rootScope.resolutionHigherIndex = Math.round(values[1]);
             });
@@ -203,11 +205,88 @@ laptops.controller("searchCtrl", ['$scope','$rootScope','$timeout',
 
         priceSlider.noUiSlider.on('update', function(values, handle ) {
             $timeout(function() {
+                $scope.filterLink = "";
                 $rootScope.priceLower = roundThousand(values[0],'round');
                 $rootScope.priceHigher = roundThousand(values[1],'round');
             });
             priceLabels[handle].value = roundThousand(values[handle],'round').toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
         });
+
+        // Virkjum þær síur sem koma inn með routeParam
+        if(Object.keys($routeParams).length > 0) {
+            var selected;
+            for(var i = 0; i < allCategories.length; i++) {
+                if ($routeParams[allCategories[i]] != undefined){
+                    selected = $routeParams[allCategories[i]].split(",");
+                    for(var j = 0; j < $rootScope[allCategories[i]].length; j++) {
+                        $rootScope[allCategories[i]][j].toggled = $.inArray($rootScope[allCategories[i]][j][0], selected) > -1;
+                    }
+                }
+            }
+            if($routeParams["ram"]) ramSlider.noUiSlider.set($routeParams["ram"].split(","));
+            if($routeParams["hddSize"]) hddSlider.noUiSlider.set($routeParams["hddSize"].split(","));
+            if($routeParams["price"]) priceSlider.noUiSlider.set($routeParams["price"].split(","));
+            if($routeParams["resolution"]) {
+                var resolutions = $routeParams["resolution"].split(",");
+                var indexes = []
+                for (var i = 0; i < resolutions.length; i++) {
+                    for (var j = 0; j < $rootScope.display_resolutions.length; j++) {
+                        if (resolutions[i] == $rootScope.display_resolutions[j]) {
+                            indexes.push(j);
+                            break;
+                        }
+                    }
+                }
+                resolutionSlider.noUiSlider.set([indexes[0],indexes[1]]);
+            }
+        }
+
+        $scope.createLink = function() {
+            var getSymbol = function(link) {
+                return (link[link.length-1] == "?") ? "" : "&";
+            };
+            //var link = location.origin + "/#/search?";
+            var link = "http://laptop.is/#/search?";
+            console.log($rootScope.stores);
+            var allCategories = ['amdCpuTypes','intelCpuTypes','brands','stores','sizes','hdd_types','gpu_vendors','display_resolutions'];
+            var category;
+            var selected;
+            for (var i = 0; i < allCategories.length; i++) {
+                category = $rootScope[allCategories[i]];
+                selected = [];
+                for (var j = 0; j < category.length; j++) {
+                    if (category[j].toggled) selected.push(category[j][0]);
+                }
+                if (selected.length > 0) {
+                    link = link + getSymbol(link) + allCategories[i] + "=" + selected.join();
+                }
+            }
+            if ($rootScope.priceLower > priceRange.min || $rootScope.priceHigher < priceRange.max) {
+                link = link + getSymbol(link) + "price=" + $rootScope.priceLower + "," + $rootScope.priceHigher;
+            }
+            if ($rootScope.ramLower > ramRange.min || $rootScope.ramHigher < ramRange.max) {
+                link = link + getSymbol(link) + "ram=" + $rootScope.ramLower + "," + $rootScope.ramHigher;
+            }
+            if ($rootScope.hddLower > hddRange.min || $rootScope.hddHigher < hddRange.max) {
+                link = link + getSymbol(link) + "hddSize=" + $rootScope.hddLower + "," + $rootScope.hddHigher;
+            }
+            if ($rootScope.resolutionLowerIndex > 0 || $rootScope.resolutionHigherIndex < $rootScope.display_resolutions.length-1) {
+                link = link + getSymbol(link) + "resolution=" + $rootScope.display_resolutions[$rootScope.resolutionLowerIndex][0] + "," + $rootScope.display_resolutions[$rootScope.resolutionHigherIndex][0];
+            }
+
+            gapi.client.setApiKey('AIzaSyAO-_WMv7v_ZD3bJbD6ILB0vh4kMaSJjR4');
+            gapi.client.load('urlshortener', 'v1').then(function() {
+                function useResponse(response) {
+                    $timeout(function() {
+                        $scope.filterLink = "<input class='form-control' type='text' value='" + response.id + "' readonly>";
+                    },1);
+                }
+                var request = gapi.client.urlshortener.url.insert({
+                    'longUrl': escape(link)
+                });
+                request.execute(useResponse);
+            });
+        };
 
         // Texti fyrir modal glugga v. eiginleika.
         var infoForModals = {

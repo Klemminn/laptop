@@ -175,13 +175,23 @@
             </div>
         </div>
     </div>
-    <div class="pull-left">
-        <button class="btn btn-primary" ng-click="clearFilter()" style="margin-top: 15px">Hreinsa síu</button>
+    <div class="row" style="margin-top:15px">
+        <div class="col-md-1">
+            <button class="btn btn-primary" ng-click="clearFilter()">Hreinsa síu</button>
+        </div>
+        <div class="col-md-1">
+            <button class="btn btn-primary" ng-click="createLink()">Búa til link</button>
+        </div>
+        <div class="col-md-4">
+            <span ng-bind-html="filterLink | getHtml"></span>
+        </div>
+        <div class="col-md-6">
+            <div class="pull-right">
+                Sýni <input ng-model="resultLimit" type="number" class="form-control" style="width: 5em; display: inline-block;" min="1"> af {{filteredLaptops.length}} niðurstöðum
+            </div>
+        </div>
     </div>
-    <div class="pull-right">
-        Sýni <input ng-model="resultLimit" type="number" class="form-control" style="width: 5em; display: inline-block; margin: 15px 0 0 0" min="1"> af {{filteredLaptops.length}} niðurstöðum
-    </div>
-    <div class="row" style="margin-top: 60px; min-height: 200px">
+    <div class="row" style="margin-top: 45px; min-height: 200px">
         <div class="col-md-12">
             <table class="table table-hover">
                 <thead>
@@ -201,7 +211,7 @@
                 <tbody>
                 <tr ng-repeat="laptop in filteredLaptops = (laptops | searchFilter) | orderBy:searchSort | limitTo:resultLimit">
                     <td ng-click="showLaptop(laptop)" style="cursor:pointer"><div style="background-color: white"><center><img ng-if="$index < resultLimit" height="30px" ng-src="{{getImageLink(laptop,'small')}}"></center></div></td>
-                    <td><a href="{{laptop.url}}" ng-click="trackOutboundLink(laptop.url)" target="_blank">{{laptop.description | limitText:35}}</a></td>
+                    <td><a href="{{laptop.url}}" ng-click="sendAnalyticsEvent('outbound','click',laptop.url)" target="_blank">{{laptop.description | limitText:35}}</a></td>
                     <td><div>{{laptop.display_size}}"</div></td>
                     <td>{{laptop.display_resolution}}</td>
                     <td>{{laptop.cpu_vendor}} {{laptop.cpu_model}}</td>
