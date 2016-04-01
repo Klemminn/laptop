@@ -147,14 +147,16 @@
                 <div class="col-md-12">
                     <div class="pull-left">
                         <button class="btn btn-primary" ng-click="clearFilter()">Hreinsa síu</button>
-                        <!--<button class="btn btn-primary" ng-click="createLink()">Deila</button>
-                        <span style="display: inline-block">
+                        <button ng-show="filterLink.length == 0" class="btn btn-primary" ng-click="createLink()">Deila niðurstöðum</button>
+                        <span ng-show="filterLink.length > 0" style="display: inline-block">
                             <span style="display: inline-block">
                                 <input class='form-control' id='filterLink' type='text' ng-value="filterLink" readonly style='border-top-right-radius: 0;border-bottom-right-radius:0;'>
                             </span>
                             <button class="btn btn-default" id="clipboardButton" data-clipboard-target="#filterLink" title="Afrita link" style="margin: -3px 0 0 -4px; border-top-left-radius: 0;border-bottom-left-radius: 0;"><i class="fa fa-clipboard"></i></button>
-                            <button class="btn btn-default" ng-click="shareOnFacebook()">Facebook</button>
-                        </span>-->
+                            <span style="display: inline-block; cursor: pointer" ng-click="shareOnFacebook()">
+                                <img src="images/fbshare.png">
+                            </span>
+                        </span>
                     </div>
                     <div class="pull-right">
                         Sýni <input ng-model="resultLimit" type="number" class="form-control" style="width: 5em; display: inline-block;" min="1"> af {{filteredLaptops.length}} niðurstöðum

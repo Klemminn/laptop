@@ -30,10 +30,6 @@ laptops.config(['$routeProvider',
                 templateUrl: 'app/views/search.html',
                 controller: 'searchCtrl'
             }).
-            when('/search2', {
-                templateUrl: 'app/views/search2.html',
-                controller: 'searchCtrl'
-            }).
             otherwise({
                 redirectTo: '/search'
             });
