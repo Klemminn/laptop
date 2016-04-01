@@ -39,6 +39,7 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/ui-bootstrap-tpls-1.2.5.min.js"></script>
     <script src="js/nouislider.min.js"></script>
+    <script src="js/clipboard.min.js"></script>
 
     <script src="app/js/laptopsApp.js"></script>
     <script src="app/js/database.js"></script>
@@ -63,7 +64,7 @@
 
 </head>
 <body>
-
+<div id="fb-root"></div>
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header" style="height:5em">
@@ -117,4 +118,22 @@
     fbq('track', "PageView");</script>
 <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=735089473301962&ev=PageView&noscript=1"/></noscript>
 <!-- End Facebook Pixel Code -->
+<!-- Facebook share button -->
+<script>
+    window.fbAsyncInit = function() {
+        FB.init({
+            appId      : '916707535108878',
+            xfbml      : true,
+            version    : 'v2.5'
+        });
+    };
+
+    (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>
 </html>

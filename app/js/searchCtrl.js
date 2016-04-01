@@ -10,11 +10,23 @@ laptops.controller("searchCtrl", ['$scope','$rootScope','$timeout','$routeParams
         $rootScope.selectedLaptop = $rootScope.laptops[0];
         $scope.resultLimit = 50;
         var allCategories = ['amdCpuTypes','intelCpuTypes','brands','stores','sizes','hdd_types','gpu_vendors','display_resolutions'];
+        new Clipboard('#clipboardButton');
 
         $scope.sendAnalyticsEvent = function(category,action,label) {
             ga('send', 'event', category, action, label, {
                 'transport': 'beacon'
             });
+        };
+
+        var removeIcelandic = function(string) {
+            string = string.toString();
+            var icelandic = {'á': 'a','ð': 'd','é': 'e','í': 'i','ó': 'o','ú': 'u','ý': 'y','þ': 'th','æ': 'ae','ö': 'o'};
+            for (var letter in icelandic) {
+                if (icelandic.hasOwnProperty(letter)) {
+                    string = string.replace(new RegExp(letter, 'g'), icelandic[letter]);
+                }
+            }
+            return string;
         };
 
         $scope.clearFilter = function() {
@@ -219,7 +231,7 @@ laptops.controller("searchCtrl", ['$scope','$rootScope','$timeout','$routeParams
                 if ($routeParams[allCategories[i]] != undefined){
                     selected = $routeParams[allCategories[i]].split(",");
                     for(var j = 0; j < $rootScope[allCategories[i]].length; j++) {
-                        $rootScope[allCategories[i]][j].toggled = $.inArray($rootScope[allCategories[i]][j][0], selected) > -1;
+                        $rootScope[allCategories[i]][j].toggled = $.inArray(removeIcelandic($rootScope[allCategories[i]][j][0]), selected) > -1;
                     }
                 }
             }
@@ -228,7 +240,7 @@ laptops.controller("searchCtrl", ['$scope','$rootScope','$timeout','$routeParams
             if($routeParams["price"]) priceSlider.noUiSlider.set($routeParams["price"].split(","));
             if($routeParams["resolution"]) {
                 var resolutions = $routeParams["resolution"].split(",");
-                var indexes = []
+                var indexes = [];
                 for (var i = 0; i < resolutions.length; i++) {
                     for (var j = 0; j < $rootScope.display_resolutions.length; j++) {
                         if (resolutions[i] == $rootScope.display_resolutions[j]) {
@@ -241,13 +253,19 @@ laptops.controller("searchCtrl", ['$scope','$rootScope','$timeout','$routeParams
             }
         }
 
+        $scope.shareOnFacebook = function() {
+            FB.ui({
+                method: 'share',
+                href: $scope.longFilterLink
+            }, function(response){});
+        };
+
         $scope.createLink = function() {
             var getSymbol = function(link) {
                 return (link[link.length-1] == "?") ? "" : "&";
             };
             //var link = location.origin + "/#/search?";
             var link = "http://laptop.is/#/search?";
-            console.log($rootScope.stores);
             var allCategories = ['amdCpuTypes','intelCpuTypes','brands','stores','sizes','hdd_types','gpu_vendors','display_resolutions'];
             var category;
             var selected;
@@ -255,7 +273,7 @@ laptops.controller("searchCtrl", ['$scope','$rootScope','$timeout','$routeParams
                 category = $rootScope[allCategories[i]];
                 selected = [];
                 for (var j = 0; j < category.length; j++) {
-                    if (category[j].toggled) selected.push(category[j][0]);
+                    if (category[j].toggled) selected.push(removeIcelandic(category[j][0]));
                 }
                 if (selected.length > 0) {
                     link = link + getSymbol(link) + allCategories[i] + "=" + selected.join();
@@ -274,15 +292,17 @@ laptops.controller("searchCtrl", ['$scope','$rootScope','$timeout','$routeParams
                 link = link + getSymbol(link) + "resolution=" + $rootScope.display_resolutions[$rootScope.resolutionLowerIndex][0] + "," + $rootScope.display_resolutions[$rootScope.resolutionHigherIndex][0];
             }
 
+            $scope.longFilterLink = link;
+
             gapi.client.setApiKey('AIzaSyAO-_WMv7v_ZD3bJbD6ILB0vh4kMaSJjR4');
             gapi.client.load('urlshortener', 'v1').then(function() {
                 function useResponse(response) {
                     $timeout(function() {
-                        $scope.filterLink = "<input class='form-control' type='text' value='" + response.id + "' readonly>";
+                        $scope.filterLink = response.id;
                     },1);
                 }
                 var request = gapi.client.urlshortener.url.insert({
-                    'longUrl': escape(link)
+                    'longUrl': link
                 });
                 request.execute(useResponse);
             });

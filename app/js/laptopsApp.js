@@ -35,6 +35,6 @@ laptops.config(['$routeProvider',
                 controller: 'searchCtrl'
             }).
             otherwise({
-                redirectTo: '/search2'
+                redirectTo: '/search'
             });
     }]);
