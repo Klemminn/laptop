@@ -169,7 +169,7 @@
                         <thead>
                         <tr>
                             <th></th>
-                            <th ng-class="{underline: checkSort('description')}"><span ng-click="changeSort('description')">Lýsing</span><span style="display:inline-block;margin-left:10px"><input id="textFilter" class='form-control' style="height:1.7em" type="text" ng-change="filterLink = ''" ng-model="textFilter.description"></span></th>
+                            <th ng-class="{underline: checkSort('description')}"><span ng-click="changeSort('description')">Lýsing</span><span style="display:inline-block;margin-left:10px"><input id="textFilter" class='form-control' style="height:1.7em" type="text" ng-change="filterLink = ''" ng-model="textFilter.description" placeholder="Leit eftir lýsingu"></span></th>
                             <th ng-click="changeSort('display_size')" ng-class="{underline: checkSort('display_size')}">Skjástærð</th>
                             <th ng-click="changeSort('display_resolution')" ng-class="{underline: checkSort('display_resolution')}">Upplausn</th>
                             <th ng-click="changeSort('cpu_vendor')" ng-class="{underline: checkSort('cpu_vendor')}">Örgjörvi</th>
