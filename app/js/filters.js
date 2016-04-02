@@ -24,42 +24,16 @@ laptops.filter('searchFilter', function($rootScope) {
     return function(input) {
         if (input) {
             var filtered = [];
-            var add, item;
-            var cpuTypes = $rootScope.intelCpuTypes.concat($rootScope.amdCpuTypes);
-            var toggledBrands = [];
-            for (var i = 0; i < $rootScope.brands.length; i++) {
-                if ($rootScope.brands[i].toggled) {
-                    toggledBrands.push($rootScope.brands[i][0])
-                }
-            }
-            var toggledStores = [];
-            for (var i = 0; i < $rootScope.stores.length; i++) {
-                if ($rootScope.stores[i].toggled) {
-                    toggledStores.push($rootScope.stores[i][0])
-                }
-            }
-            var toggledSizes = [];
-            for (var i = 0; i < $rootScope.sizes.length; i++) {
-                if ($rootScope.sizes[i].toggled) {
-                    toggledSizes.push($rootScope.sizes[i][0])
-                }
-            }
-            var toggledCpuTypes = [];
-            for (var i = 0; i < cpuTypes.length; i++) {
-                if (cpuTypes[i].toggled) {
-                    toggledCpuTypes.push(cpuTypes[i][0]);
-                }
-            }
-            var toggledHddTypes = [];
-            for (var i = 0; i < $rootScope.hdd_types.length; i++) {
-                if ($rootScope.hdd_types[i].toggled) {
-                    toggledHddTypes.push($rootScope.hdd_types[i][0]);
-                }
-            }
-            var toggledGpuVendors = [];
-            for (var i = 0; i < $rootScope.gpu_vendors.length; i++) {
-                if ($rootScope.gpu_vendors[i].toggled) {
-                    toggledGpuVendors.push($rootScope.gpu_vendors[i][0]);
+            var buttonCategories = ["brands","stores","sizes","cpuTypes","hdd_types","gpu_vendors"];
+            var toggled = {};
+            var add, item, category;
+            for (var i = 0; i < buttonCategories.length; i++) {
+                category = buttonCategories[i];
+                toggled[category] = [];
+                for (var j = 0; j < $rootScope[category].length; j++) {
+                    if ($rootScope[category][j].toggled) {
+                        toggled[category].push($rootScope[category][j][0]);
+                    }
                 }
             }
             for (var i = 0; i < input.length; i++) {
@@ -72,22 +46,22 @@ laptops.filter('searchFilter', function($rootScope) {
                     }
                 }
                 // Leitum eftir verslun
-                add = (toggledStores.length == 0 || $.inArray(item.store, toggledStores) > -1);
+                add = (toggled.stores.length == 0 || $.inArray(item.store, toggled.stores) > -1);
                 if (add == false) continue;
                 // Leitum eftir framleiðanda
-                add = (toggledBrands.length == 0 || $.inArray(item.brand, toggledBrands) > -1);
+                add = (toggled.brands.length == 0 || $.inArray(item.brand, toggled.brands) > -1);
                 if (add == false) continue;
                 // Leitum eftir skjástærð
-                if (toggledSizes.length > 0) {
+                if (toggled.sizes.length > 0) {
                     if (Math.floor(item.display_size) == 11) {
-                        add = $.inArray(12, toggledSizes) > -1;
+                        add = $.inArray(12, toggled.sizes) > -1;
                     } else {
-                        add = $.inArray(Math.floor(item.display_size), toggledSizes) > -1;
+                        add = $.inArray(Math.floor(item.display_size), toggled.sizes) > -1;
                     }
                     if (add == false) continue;
                 }
                 // Leitum eftir örgjörva
-                add = (toggledCpuTypes.length == 0 || $.inArray(item.cpu_type, toggledCpuTypes) > -1);
+                add = (toggled.cpuTypes.length == 0 || $.inArray(item.cpu_type, toggled.cpuTypes) > -1);
                 if (add == false) continue;
                 // Leitum eftir stærð harðs disks
                 add = (item.hdd_capacity >= Number($rootScope.hddLower) && item.hdd_capacity <= Number($rootScope.hddHigher));
@@ -96,10 +70,10 @@ laptops.filter('searchFilter', function($rootScope) {
                 add = (item.resolutionIndex >= $rootScope.resolutionLowerIndex && item.resolutionIndex <= $rootScope.resolutionHigherIndex);
                 if (add == false) continue;
                 // Leitum eftir týpu af hörðum disk
-                add = (toggledHddTypes.length == 0 || $.inArray(item.hdd_type, toggledHddTypes) > -1);
+                add = (toggled.hdd_types.length == 0 || $.inArray(item.hdd_type, toggled.hdd_types) > -1);
                 if (add == false) continue;
                 // Leitum eftir skjákorti
-                add = (toggledGpuVendors.length == 0 || $.inArray(item.gpu_vendor, toggledGpuVendors) > -1);
+                add = (toggled.gpu_vendors.length == 0 || $.inArray(item.gpu_vendor, toggled.gpu_vendors) > -1);
                 if (add == false) continue;
                 // Leitum eftir vinnsluminni
                 add = (item.ram >= Number($rootScope.ramLower) && item.ram <= Number($rootScope.ramHigher));

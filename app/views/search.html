@@ -181,7 +181,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="laptop in filteredLaptops = (laptops | searchFilter) | filter:textFilter | orderBy:searchSort | limitTo:resultLimit">
+                        <tr ng-repeat="laptop in filteredLaptops = (laptops | searchFilter | filter:textFilter) | orderBy:searchSort | limitTo:resultLimit">
                             <td ng-click="showLaptop(laptop)" style="cursor:pointer"><div style="background-color: white"><center><img ng-if="$index < resultLimit" height="30px" ng-src="{{getImageLink(laptop,'small')}}"></center></div></td>
                             <td><a href="{{laptop.url}}" ng-click="trackOutboundLink(laptop.url)" target="_blank">{{laptop.description | limitText:35}}</a></td>
                             <td><div>{{laptop.display_size}}"</div></td>
