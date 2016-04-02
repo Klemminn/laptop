@@ -26,7 +26,7 @@ laptops.filter('searchFilter', function($rootScope) {
             var filtered = [];
             var buttonCategories = ["brands","stores","sizes","cpuTypes","hdd_types","gpu_vendors"];
             var toggled = {};
-            var add, item, category;
+            var add, item, category, size;
             for (var i = 0; i < buttonCategories.length; i++) {
                 category = buttonCategories[i];
                 toggled[category] = [];
@@ -47,41 +47,28 @@ laptops.filter('searchFilter', function($rootScope) {
                 }
                 // Leitum eftir verslun
                 add = (toggled.stores.length == 0 || $.inArray(item.store, toggled.stores) > -1);
-                if (add == false) continue;
                 // Leitum eftir framleiðanda
-                add = (toggled.brands.length == 0 || $.inArray(item.brand, toggled.brands) > -1);
-                if (add == false) continue;
+                add = (add && toggled.brands.length == 0 || $.inArray(item.brand, toggled.brands) > -1);
                 // Leitum eftir skjástærð
-                if (toggled.sizes.length > 0) {
-                    if (Math.floor(item.display_size) == 11) {
-                        add = $.inArray(12, toggled.sizes) > -1;
-                    } else {
-                        add = $.inArray(Math.floor(item.display_size), toggled.sizes) > -1;
-                    }
-                    if (add == false) continue;
+                if (add && toggled.sizes.length > 0) {
+                    size = (Math.floor(item.display_size) == 11) ? 12 : item.display_size;
+                    add = $.inArray(Math.floor(size), toggled.sizes) > -1;
                 }
                 // Leitum eftir örgjörva
-                add = (toggled.cpuTypes.length == 0 || $.inArray(item.cpu_type, toggled.cpuTypes) > -1);
-                if (add == false) continue;
+                add = (add && toggled.cpuTypes.length == 0 || $.inArray(item.cpu_type, toggled.cpuTypes) > -1);
                 // Leitum eftir stærð harðs disks
-                add = (item.hdd_capacity >= Number($rootScope.hddLower) && item.hdd_capacity <= Number($rootScope.hddHigher));
-                if (add == false) continue;
+                add = (add && item.hdd_capacity >= Number($rootScope.hddLower) && item.hdd_capacity <= Number($rootScope.hddHigher));
                 // Leitum eftir upplausn
-                add = (item.resolutionIndex >= $rootScope.resolutionLowerIndex && item.resolutionIndex <= $rootScope.resolutionHigherIndex);
-                if (add == false) continue;
+                add = (add && item.resolutionIndex >= $rootScope.resolutionLowerIndex && item.resolutionIndex <= $rootScope.resolutionHigherIndex);
                 // Leitum eftir týpu af hörðum disk
-                add = (toggled.hdd_types.length == 0 || $.inArray(item.hdd_type, toggled.hdd_types) > -1);
-                if (add == false) continue;
+                add = (add && toggled.hdd_types.length == 0 || $.inArray(item.hdd_type, toggled.hdd_types) > -1);
                 // Leitum eftir skjákorti
-                add = (toggled.gpu_vendors.length == 0 || $.inArray(item.gpu_vendor, toggled.gpu_vendors) > -1);
-                if (add == false) continue;
+                add = (add && toggled.gpu_vendors.length == 0 || $.inArray(item.gpu_vendor, toggled.gpu_vendors) > -1);
                 // Leitum eftir vinnsluminni
-                add = (item.ram >= Number($rootScope.ramLower) && item.ram <= Number($rootScope.ramHigher));
-                if (add == false) continue;
+                add = (add && item.ram >= Number($rootScope.ramLower) && item.ram <= Number($rootScope.ramHigher));
                 // Leitum eftir verði
-                add = (item.price >= Number($rootScope.priceLower) && item.price <= Number($rootScope.priceHigher));
-                if (add == false) continue;
-                filtered.push(item);
+                add = (add && item.price >= Number($rootScope.priceLower) && item.price <= Number($rootScope.priceHigher));
+                if (add == true) filtered.push(item);
             }
             return filtered;
         }
