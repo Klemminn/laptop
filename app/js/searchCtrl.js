@@ -300,6 +300,8 @@ laptops.controller("searchCtrl", ['$scope','$rootScope','$timeout','$routeParams
                 link = link + getSymbol(link) + "description=" + $scope.textFilter.description;
             }
             $scope.longFilterLink = link;
+
+            // Sækjum styttra URL frá
             gapi.client.setApiKey('AIzaSyAO-_WMv7v_ZD3bJbD6ILB0vh4kMaSJjR4');
             gapi.client.load('urlshortener', 'v1').then(function() {
                 function useResponse(response) {
