@@ -12,9 +12,6 @@ p, div, td, span {
 body {
     background: url(../images/background.png) repeat 0 0;
 }
-.jumbotron {
-    background-color:transparent !important;
-}
 
 .noUi-connect {
     background: #32C0F0;
@@ -22,7 +19,6 @@ body {
 
 .darken {
     background: rgba(54, 25, 25, .07);
-    margin-top:50px;
 }
 
 .welcome {
@@ -51,4 +47,14 @@ body {
     padding-left: 0.3em;
     color: grey;
     cursor: pointer;
+}
+
+@media (min-width: 992px) {
+    .mainRow {
+        overflow: hidden;
+    }
+    .mainColumns {
+        margin-bottom: -99999px;
+        padding-bottom: 99999px;
+    }
 }
