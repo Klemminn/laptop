@@ -21,7 +21,7 @@ laptops.controller("searchCtrl", ['$scope','$rootScope','$timeout','$routeParams
         };
 
         var removeIcelandic = function(string) {
-            string = string.toString();
+            string = string.toString().toLowerCase();
             var icelandic = {'á': 'a','ð': 'd','é': 'e','í': 'i','ó': 'o','ú': 'u','ý': 'y','þ': 'th','æ': 'ae','ö': 'o'};
             for (var letter in icelandic) {
                 if (icelandic.hasOwnProperty(letter)) {
