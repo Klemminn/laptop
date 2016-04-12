@@ -349,7 +349,7 @@ laptops.controller("searchCtrl", ['$scope','$rootScope','$timeout','$routeParams
                 "title": "Harður diskur",
                 "body": "<div>Diskur tölvunar er það geymslurými sem tölvan hefur.<br/>" +
                 "Á síðustu árum hafa verið að ryðja sér til rúms svo kallaðir Solid State Diskar (SSD), sem eru í raun ekki harðir diskar heldur flash minni.<br/>" +
-                "Slíkir diskar eru margfalt hraðari og gera tölvuna því liprari og skemmtilegri í notkun.  Hins vegar eru þeir einnig dýrari og oft er hafa þeir takmarkað geymslurými.<br/>" +
+                "Slíkir diskar eru margfalt hraðari og gera tölvuna því liprari og skemmtilegri í notkun.  Hins vegar eru þeir einnig dýrari og oft hafa þeir takmarkað geymslurými.<br/>" +
                 "Því hafa einnig komið fram SSHD diskar, sem eru hybrid, þ.e. eru í grunninn hefðbundnir harðir diskar, en þó með flash minni sem heldur utan um mest notuðu gögnin.  " +
                 "Slíkir diskar brúa því að einhverju leiti bilið milli HDD og SSD, bjóða upp á stærðina sem HDD býður og smá hraðaaukningu með flash minninu.<br/><br/>" +
                 "<b>SSD diskar hafa gífurleg áhrif á notendaupplifun, þar sem þeir hraða flestum aðgerðum.</b></div>"
