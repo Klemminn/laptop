@@ -6,43 +6,48 @@
     <table class="table table-hover comparisonTable">
         <tr>
             <td></td>
-            <td ng-repeat="laptop in data"><center><img ng-src="{{laptop.largeImage}}" style="width:12em"></center></td>
+            <td ng-repeat="laptop in laptopsToCompare"><center><img ng-src="{{laptop.largeImage}}" style="width:12em"></center></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td ng-repeat="laptop in laptopsToCompare"><button class="btn btn-danger" ng-click="removeFromCompare($index)">Fjarlægja</button></td>
+
         </tr>
         <tr>
             <td>Lýsing</td>
-            <td ng-repeat="laptop in data">{{laptop.description}}</td>
+            <td ng-repeat="laptop in laptopsToCompare">{{laptop.description}}</td>
         </tr>
         <tr>
             <td>Skjástærð</td>
-            <td ng-repeat="laptop in data">{{laptop.display_size}}"</td>
+            <td ng-repeat="laptop in laptopsToCompare">{{laptop.display_size}}"</td>
         </tr>
         <tr>
             <td>Upplausn</td>
-            <td ng-repeat="laptop in data">{{laptop.display_resolution}}</td>
+            <td ng-repeat="laptop in laptopsToCompare">{{laptop.display_resolution}}</td>
         </tr>
         <tr>
             <td>Örgjörvi</td>
-            <td ng-repeat="laptop in data">{{laptop.cpu_vendor}} {{laptop.cpu_model}}</td>
+            <td ng-repeat="laptop in laptopsToCompare">{{laptop.cpu_vendor}} {{laptop.cpu_model}}</td>
         </tr>
         <tr>
             <td>Vinnsluminni</td>
-            <td ng-repeat="laptop in data">{{laptop.ram}}GB</td>
+            <td ng-repeat="laptop in laptopsToCompare">{{laptop.ram}}GB</td>
         </tr>
         <tr>
             <td>Diskur</td>
-            <td ng-repeat="laptop in data">{{laptop.disk}}</td>
+            <td ng-repeat="laptop in laptopsToCompare">{{laptop.disk}}</td>
         </tr>
         <tr>
             <td>Skjákort</td>
-            <td ng-repeat="laptop in data">{{laptop.gpu_vendor}} {{laptop.gpu_model}}</td>
+            <td ng-repeat="laptop in laptopsToCompare">{{laptop.gpu_vendor}} {{laptop.gpu_model}}</td>
         </tr>
         <tr>
             <td>Verslun</td>
-            <td ng-repeat="laptop in data">{{laptop.store}}</td>
+            <td ng-repeat="laptop in laptopsToCompare">{{laptop.store}}</td>
         </tr>
         <tr style="font-size: 1.3em; font-weight: bold">
             <td>Verð</td>
-            <td ng-repeat="laptop in data">{{laptop.price | thousandSeparator}}kr.</td>
+            <td ng-repeat="laptop in laptopsToCompare">{{laptop.price | thousandSeparator}}kr.</td>
         </tr>
     </table>
 

@@ -52,23 +52,23 @@ laptops.controller("searchCtrl", ['$scope','$rootScope','$timeout','$routeParams
             $rootScope.openModal('laptopModal','lg',laptop);
         };
 
-        $scope.numberToCompare = 0;
+        $rootScope.numberToCompare = 0;
         $scope.countComparison = function(trueOrFalse) {
-            $scope.numberToCompare = trueOrFalse ? $scope.numberToCompare+1 : $scope.numberToCompare-1;
+            if (trueOrFalse) $rootScope.numberToCompare++; else $rootScope.numberToCompare--;
         };
 
         $scope.getComparison = function() {
-            var laptopsToCompare = [];
+            $rootScope.laptopsToCompare = [];
             var laptop;
             for (var i = 0; i < $rootScope.laptops.length; i++) {
                 laptop = $rootScope.laptops[i];
                 if (laptop.compare) {
                     laptop.largeImage = $scope.getImageLink(laptop,'large');
                     laptop.disk = $scope.getDiskText(laptop.hdd_capacity, laptop.hdd_type);
-                    laptopsToCompare.push(laptop);
+                    $rootScope.laptopsToCompare.push(laptop);
                 }
             }
-            $rootScope.openModal('comparisonModal','lg',laptopsToCompare);
+            $rootScope.openModal('comparisonModal','lg',$rootScope.laptopsToCompare);
         };
 
         // Opnar modal glugga með upplýsingum um ákveðinn eiginleika, s.s. skjástærð, örgjörva o.s.frv.

@@ -77,11 +77,11 @@ body {
     min-width: 300px;
 }
 
-.comparisonTable tr:first-child:hover {
+.comparisonTable tr:first-child:hover, .comparisonTable tr:nth-child(2) {
     background-color: white;
 }
 
-.comparisonTable tr:first-child td{
+.comparisonTable tr:first-child td, .comparisonTable tr:nth-child(2) td{
     border-top: none;
     vertical-align: middle;
 }
@@ -95,6 +95,6 @@ body {
     font-weight: bold;
 }
 
-.comparisonTable tr:not(:first-child) td:nth-child(even) {
+.comparisonTable tr:not(:first-child):not(:nth-child(2)) td:nth-child(even) {
     background: rgba(54, 25, 25, .07);
 }
