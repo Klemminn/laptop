@@ -60,8 +60,8 @@ laptops.controller("searchCtrl", ['$scope','$rootScope','$timeout','$routeParams
         $scope.getComparison = function() {
             var laptopsToCompare = [];
             var laptop;
-            for (var i = 0; i < $scope.filteredLaptops.length; i++) {
-                laptop = $scope.filteredLaptops[i];
+            for (var i = 0; i < $rootScope.laptops.length; i++) {
+                laptop = $rootScope.laptops[i];
                 if (laptop.compare) {
                     laptop.largeImage = $scope.getImageLink(laptop,'large');
                     laptop.disk = $scope.getDiskText(laptop.hdd_capacity, laptop.hdd_type);
