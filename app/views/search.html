@@ -148,6 +148,7 @@
                     <div class="pull-left">
                         <button class="btn btn-primary" ng-click="clearFilter()">Hreinsa síu</button>
                         <button ng-show="filterLink.length == 0" class="btn btn-primary" ng-click="createLink()">Deila niðurstöðum</button>
+
                         <span ng-show="filterLink.length > 0" style="display: inline-block">
                             <span style="display: inline-block">
                                 <input class='form-control' id='filterLink' type='text' ng-value="filterLink" readonly style='border-top-right-radius: 0;border-bottom-right-radius:0;'>
@@ -159,6 +160,7 @@
                         </span>
                     </div>
                     <div class="pull-right">
+                        <button ng-show="numberToCompare>0" class="btn btn-success" ng-click="getComparison()">Bera saman</button>
                         Sýni <input ng-model="resultLimit" type="number" class="form-control" style="width: 5em; display: inline-block;" min="1"> af {{filteredLaptops.length}} niðurstöðu<span ng-if="filteredLaptops.length%100==11||filteredLaptops.length%10!=1">m</span>
                     </div>
                 </div>
@@ -168,6 +170,7 @@
                     <table class="table table-hover">
                         <thead>
                         <tr>
+                            <th style="cursor:initial" title="Samanburður"><i class="fa fa-tasks"></i></th>
                             <th></th>
                             <th ng-class="{underline: checkSort('description')}"><span ng-click="changeSort('description')">Lýsing</span><span style="display:inline-block;margin-left:10px"><input id="textFilter" class='form-control' style="height:1.7em" type="text" ng-change="filterLink = ''" ng-model="textFilter.description" placeholder="Leit eftir lýsingu"></span></th>
                             <th ng-click="changeSort('display_size')" ng-class="{underline: checkSort('display_size')}">Skjástærð</th>
@@ -182,8 +185,9 @@
                         </thead>
                         <tbody>
                         <tr ng-repeat="laptop in filteredLaptops = (laptops | searchFilter | filter:textFilter) | orderBy:searchSort | limitTo:resultLimit">
+                            <td><input type="checkbox" ng-model="laptop.compare" ng-change="countComparison(laptop.compare)" class="bigCheckbox"/></td>
                             <td ng-click="showLaptop(laptop)" style="cursor:pointer"><div style="background-color: white"><center><img ng-if="$index < resultLimit" height="30px" ng-src="{{getImageLink(laptop,'small')}}"></center></div></td>
-                            <td><a href="{{laptop.url}}" ng-click="sendAnalyticsEvent('outbound','click',laptop.url)" target="_blank">{{laptop.description | limitText:35}}</a></td>
+                            <td><a href="{{laptop.url}}" ng-click="sendAnalyticsEvent('outbound','click',laptop.url)" target="_blank" title="{{laptop.description}}">{{laptop.description | limitText:35}}</a></td>
                             <td><div>{{laptop.display_size}}"</div></td>
                             <td>{{laptop.display_resolution}}</td>
                             <td>{{laptop.cpu_vendor}} {{laptop.cpu_model}}</td>
