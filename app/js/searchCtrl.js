@@ -55,6 +55,7 @@ laptops.controller("searchCtrl", ['$scope','$rootScope','$timeout','$routeParams
         $rootScope.numberToCompare = 0;
         $scope.countComparison = function(trueOrFalse) {
             if (trueOrFalse) $rootScope.numberToCompare++; else $rootScope.numberToCompare--;
+            if ($rootScope.numberToCompare > 0) $scope.unchecker = true;
         };
 
         $scope.getComparison = function() {
@@ -70,6 +71,12 @@ laptops.controller("searchCtrl", ['$scope','$rootScope','$timeout','$routeParams
             }
             $rootScope.laptopsToCompare.sort(function(a,b) {return a.price - b.price});
             $rootScope.openModal('comparisonModal','lg',$rootScope.laptopsToCompare);
+        };
+        $rootScope.uncheckAll = function() {
+            for (var i = 0; i < $rootScope.laptops.length; i++) {
+                $rootScope.laptops[i].compare = false;
+            }
+            $rootScope.numberToCompare = 0;
         };
 
         // Opnar modal glugga með upplýsingum um ákveðinn eiginleika, s.s. skjástærð, örgjörva o.s.frv.

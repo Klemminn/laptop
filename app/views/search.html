@@ -170,7 +170,10 @@
                     <table class="table table-hover">
                         <thead>
                         <tr>
-                            <th style="cursor:initial" title="Samanburður"><i class="fa fa-tasks"></i></th>
+                            <th style="cursor:initial" title="Samanburður">
+                                <!--<i class="fa fa-tasks"></i>-->
+                                <input ng-disabled="numberToCompare<1" type="checkbox" ng-model="unchecker" class="bigCheckbox" ng-change="uncheckAll()">
+                            </th>
                             <th></th>
                             <th ng-class="{underline: checkSort('description')}"><span ng-click="changeSort('description')">Lýsing</span><span style="display:inline-block;margin-left:10px"><input id="textFilter" class='form-control' style="height:1.7em" type="text" ng-change="filterLink = ''" ng-model="textFilter.description" placeholder="Leit eftir lýsingu"></span></th>
                             <th ng-click="changeSort('display_size')" ng-class="{underline: checkSort('display_size')}">Skjástærð</th>
