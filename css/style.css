@@ -77,7 +77,7 @@ body {
     min-width: 300px;
 }
 
-.comparisonTable tr:first-child:hover, .comparisonTable tr:nth-child(2) {
+.comparisonTable tr:first-child:hover, .comparisonTable tr:nth-child(2):hover {
     background-color: white;
 }
 
