@@ -68,6 +68,7 @@ laptops.controller("searchCtrl", ['$scope','$rootScope','$timeout','$routeParams
                     $rootScope.laptopsToCompare.push(laptop);
                 }
             }
+            $rootScope.laptopsToCompare.sort(function(a,b) {return a.price - b.price});
             $rootScope.openModal('comparisonModal','lg',$rootScope.laptopsToCompare);
         };
 

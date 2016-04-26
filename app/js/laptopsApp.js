@@ -14,6 +14,7 @@ var laptops = angular.module("laptops", ['ngRoute','ui.bootstrap']).run(['$rootS
             });
         };
         $rootScope.removeFromCompare = function(index) {
+            $rootScope.laptopsToCompare[index].compare = false;
             $rootScope.laptopsToCompare.splice(index,1);
             $rootScope.numberToCompare--;
         }
