@@ -9,8 +9,10 @@ laptops.controller("searchCtrl", ['$scope','$rootScope','$timeout','$routeParams
         $rootScope.cpuTypes = $rootScope.intelCpuTypes.concat($rootScope.amdCpuTypes);
         $rootScope.thisYear = new Date().getFullYear();
         $rootScope.selectedLaptop = $rootScope.laptops[0];
+        $rootScope.numberToCompare = 0;
         $scope.resultLimit = 50;
         $scope.textFilter = {description: ""};
+
         var allCategories = ['amdCpuTypes','intelCpuTypes','brands','stores','sizes','hdd_types','gpu_vendors','display_resolutions'];
         new Clipboard('#clipboardButton');
 
@@ -50,12 +52,6 @@ laptops.controller("searchCtrl", ['$scope','$rootScope','$timeout','$routeParams
             laptop.largeImage = $scope.getImageLink(laptop,'large');
             laptop.disk = $scope.getDiskText(laptop.hdd_capacity, laptop.hdd_type);
             $rootScope.openModal('laptopModal','lg',laptop);
-        };
-
-        $rootScope.numberToCompare = 0;
-        $scope.countComparison = function(trueOrFalse) {
-            if (trueOrFalse) $rootScope.numberToCompare++; else $rootScope.numberToCompare--;
-            if ($rootScope.numberToCompare > 0) $scope.unchecker = true;
         };
 
         $scope.getComparison = function() {

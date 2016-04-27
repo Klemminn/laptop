@@ -13,12 +13,18 @@ var laptops = angular.module("laptops", ['ngRoute','ui.bootstrap']).run(['$rootS
                 }
             });
         };
+
         $rootScope.removeFromCompare = function(index) {
             $rootScope.laptopsToCompare[index].compare = false;
             $rootScope.laptopsToCompare.splice(index,1);
-            $rootScope.numberToCompare--;
+            $rootScope.countComparison(false);
             if ($rootScope.numberToCompare < 1) $uibModalStack.dismissAll();
-        }
+        };
+
+        $rootScope.countComparison = function(isTrue) {
+            if (isTrue) $rootScope.numberToCompare++; else $rootScope.numberToCompare--;
+            $rootScope.unchecker = ($rootScope.numberToCompare > 0);
+        };
     }]);
 
 laptops.controller('modalCtrl', ['$scope', '$rootScope', '$uibModalInstance', 'data',
