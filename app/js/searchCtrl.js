@@ -72,7 +72,8 @@ laptops.controller("searchCtrl", ['$scope','$rootScope','$timeout','$routeParams
             $rootScope.laptopsToCompare.sort(function(a,b) {return a.price - b.price});
             $rootScope.openModal('comparisonModal','lg',$rootScope.laptopsToCompare);
         };
-        $rootScope.uncheckAll = function() {
+
+        $scope.uncheckAll = function() {
             for (var i = 0; i < $rootScope.laptops.length; i++) {
                 $rootScope.laptops[i].compare = false;
             }

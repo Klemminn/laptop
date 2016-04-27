@@ -161,7 +161,7 @@
                     </div>
                     <div class="pull-right">
                         <button ng-show="numberToCompare>0" class="btn btn-success" ng-click="getComparison()">Bera saman ({{numberToCompare}})</button>
-                        Sýni <input ng-model="resultLimit" type="number" class="form-control" style="width: 5em; display: inline-block;" min="1"> af {{filteredLaptops.length}} niðurstöðu<span ng-if="filteredLaptops.length%100==11||filteredLaptops.length%10!=1">m</span>
+                        Sýni <input ng-model="resultLimit" type="number" class="form-control" style="width: 5em; display: inline-block;" min="1" step="25"> af {{filteredLaptops.length}} niðurstöðu<span ng-if="filteredLaptops.length%100==11||filteredLaptops.length%10!=1">m</span>
                     </div>
                 </div>
             </div>
