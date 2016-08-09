@@ -2,42 +2,42 @@
     <button type="button" class="close" ng-click="close()">&times;</button>
     <h4 class="modal-title">{{data.description}}</h4>
 </div>
-<div id="laptopModalBody" class="modal-body">
+<div id="laptop-modal-body" class="modal-body">
     <center style="margin-bottom:2.5em">
         <img ng-src="{{data.largeImage}}">
     </center>
 
     <div class="row">
         <div class="col-md-3 col-xs-6">Skjástærð</div>
-        <div class="col-md-3 col-xs-6">{{data.display_size}}"</div>
+        <div class="col-md-9 col-xs-6">{{data.display_size}}"</div>
     </div>
     <div class="row">
         <div class="col-md-3 col-xs-6">Upplausn</div>
-        <div class="col-md-3 col-xs-6">{{data.display_resolution}}</div>
+        <div class="col-md-9 col-xs-6">{{data.display_resolution}}</div>
     </div>
     <div class="row">
         <div class="col-md-3 col-xs-6">Örgjörvi</div>
-        <div class="col-md-3 col-xs-6">{{data.cpu_vendor}} {{data.cpu_model}}</div>
+        <div class="col-md-9 col-xs-6">{{data.cpu_vendor}} {{data.cpu_model}}</div>
     </div>
     <div class="row">
         <div class="col-md-3 col-xs-6">Vinnsluminni</div>
-        <div class="col-md-3 col-xs-6">{{data.ram}}GB</div>
+        <div class="col-md-9 col-xs-6">{{data.ram}}GB</div>
     </div>
     <div class="row">
         <div class="col-md-3 col-xs-6">Diskur</div>
-        <div class="col-md-3 col-xs-6">{{data.disk}}</div>
+        <div class="col-md-9 col-xs-6">{{data.disk}}</div>
     </div>
     <div class="row">
         <div class="col-md-3 col-xs-6">Skjákort</div>
-        <div class="col-md-3 col-xs-6">{{data.gpu_vendor}} {{data.gpu_model}}</div>
+        <div class="col-md-9 col-xs-6">{{data.gpu_vendor}} {{data.gpu_model}}</div>
     </div>
     <div class="row">
         <div class="col-md-3 col-xs-6">Verslun</div>
-        <div class="col-md-3 col-xs-6">{{data.store}}</div>
+        <div class="col-md-9 col-xs-6">{{data.store}}</div>
     </div>
     <div class="row" style="font-size: 1.3em">
         <div class="col-md-3 col-xs-6">Verð</div>
-        <div class="col-md-3 col-xs-6">{{data.price | thousandSeparator}}kr.</div>
+        <div class="col-md-9 col-xs-6">{{data.price | thousandSeparator}}kr.</div>
     </div>
 </div>
 <div class="modal-footer">

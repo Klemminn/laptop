@@ -46,6 +46,10 @@ laptops.controller("searchCtrl", ['$scope','$rootScope','$timeout','$routeParams
             $scope.textFilter.description = "";
         };
 
+        // Opnar ráðgjafann
+        $scope.openWizard = function() {
+            $rootScope.openModal('wizardModal','md');
+        };
 
         // Opnar modal glugga með upplýsingum um staka fartölvu
         $scope.showLaptop = function(laptop) {

@@ -158,6 +158,7 @@
                                 <img src="images/fbshare.png">
                             </span>
                         </span>
+                        <!--<button class="btn btn-success" ng-click="openWizard()">Opna ráðgjafann</button>-->
                     </div>
                     <div class="pull-right">
                         <button ng-show="numberToCompare>0" class="btn btn-success" ng-click="getComparison()">Bera saman ({{numberToCompare}})</button>
@@ -172,7 +173,7 @@
                         <tr>
                             <th style="cursor:initial" title="Samanburður">
                                 <!--<i class="fa fa-tasks"></i>-->
-                                <input ng-disabled="numberToCompare<1" type="checkbox" ng-model="unchecker" class="bigCheckbox" ng-change="uncheckAll()">
+                                <input ng-disabled="numberToCompare<1" type="checkbox" ng-model="unchecker" class="big-checkbox" ng-change="uncheckAll()">
                             </th>
                             <th></th>
                             <th ng-class="{underline: checkSort('description')}"><span ng-click="changeSort('description')">Lýsing</span><span style="display:inline-block;margin-left:10px"><input id="textFilter" class='form-control' style="height:1.7em" type="text" ng-change="filterLink = ''" ng-model="textFilter.description" placeholder="Leit eftir lýsingu"></span></th>
@@ -188,7 +189,7 @@
                         </thead>
                         <tbody>
                         <tr ng-repeat="laptop in filteredLaptops = (laptops | searchFilter | filter:textFilter) | orderBy:searchSort | limitTo:resultLimit">
-                            <td><input ng-disabled="numberToCompare>=5 && !laptop.compare" type="checkbox" ng-model="laptop.compare" ng-change="countComparison(laptop.compare)" class="bigCheckbox"/></td>
+                            <td><input ng-disabled="numberToCompare>=5 && !laptop.compare" type="checkbox" ng-model="laptop.compare" ng-change="countComparison(laptop.compare)" class="big-checkbox"/></td>
                             <td ng-click="showLaptop(laptop)" style="cursor:pointer"><div style="background-color: white"><center><img ng-if="$index < resultLimit" height="30px" ng-src="{{getImageLink(laptop,'small')}}"></center></div></td>
                             <td><a href="{{laptop.url}}" ng-click="sendAnalyticsEvent('outbound','click',laptop.url)" target="_blank" title="{{laptop.description}}">{{laptop.description | limitText:35}}</a></td>
                             <td>{{laptop.display_size}}"</td>
