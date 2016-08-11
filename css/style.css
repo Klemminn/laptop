@@ -115,3 +115,17 @@ body {
 .full-width {
     width: 100%;
 }
+
+.question-title {
+    margin: 25px 0 15px 0;
+    font-size: 1.5em;
+}
+
+#wizardModalBody button {
+    padding: 40px 0;
+    font-size: 1.3em;
+}
+
+.display-none {
+    display: none;
+}

@@ -14,6 +14,15 @@ var laptops = angular.module("laptops", ['ngRoute','ui.bootstrap']).run(['$rootS
             });
         };
 
+        $rootScope.openWizard = function () {
+            $uibModal.open({
+                animation: true,
+                templateUrl: 'app/views/modals/wizardModal.html',
+                controller: 'wizardModalCtrl',
+                size: 'lg'
+            });
+        };
+
         $rootScope.removeFromCompare = function(index) {
             $rootScope.laptopsToCompare[index].compare = false;
             $rootScope.laptopsToCompare.splice(index,1);

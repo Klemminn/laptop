@@ -2,30 +2,80 @@
     <button type="button" class="close" ng-click="close()">&times;</button>
     <h4 class="modal-title">Ráðgjafinn</h4>
 </div>
-<div class="modal-body">
+<div id="wizardModalBody" class="modal-body">
     <div class="row">
         <div class="col-md-12">
-            Ráðgjafinn aðstoðar þig við að finna þær tölvur sem henta þínum þörfum.  Vinsamlegast svaraðu eftirfarandi
-            spurningum og ráðgjafinn færir þér í staðin tillögur að hentugum tölvum.
+            Leyfðu ráðgjafanum að aðstoða þig við valið!  Svaraðu eftirfarandi spurningum og fáðu tillögur að tölvum sem henta þínum þörfum!
+        </div>
+    </div>
+    <div class="row" id="question1">
+        <div class="col-md-12">
+            <div class="question-title">Hvort heillar þig frekar?</div>
+            <div class="row">
+                <div class="col-md-6">
+                    <button class="btn btn-success full-width" ng-click="answerQuestion(1,'light')">Létt og meðfærileg</button>
+                </div>
+                <div class="col-md-6">
+                    <button class="btn btn-success full-width" ng-click="answerQuestion(1,'big')">Stór skjár</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row display-none" id="question2">
+        <div class="col-md-12">
+            <div class="question-title">Hvort heillar þig frekar?</div>
+            <div class="row">
+                <div class="col-md-6">
+                    <button class="btn btn-success full-width" ng-click="answerQuestion(2,'speed')">Hraði</button>
+                </div>
+                <div class="col-md-6">
+                    <button class="btn btn-success full-width" ng-click="answerQuestion(2,'space')">Geymslupláss</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row display-none" id="question3">
+        <div class="col-md-12">
+            <div class="question-title">Viltu geta spilað krefjandi þrívíddarleiki?</div>
+            <div class="row">
+                <div class="col-md-6">
+                    <button class="btn btn-success full-width" ng-click="answerQuestion(3,'yes')">Já</button>
+                </div>
+                <div class="col-md-6">
+                    <button class="btn btn-success full-width" ng-click="answerQuestion(3,'no')">Nei</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row display-none" id="question4">
+        <div class="col-md-12">
+            <div class="question-title">Hvaða verðbil hefurðu í huga?</div>
+            <div class="row">
+                <div class="col-md-2">
+                    <button class="btn btn-success full-width" ng-click="answerQuestion(4,50)">Undir 50þús</button>
+                </div>
+                <div class="col-md-2">
+                    <button class="btn btn-success full-width" ng-click="answerQuestion(4,100)">50-99þús</button>
+                </div>
+                <div class="col-md-2">
+                    <button class="btn btn-success full-width" ng-click="answerQuestion(4,150)">100-149þús</button>
+                </div>
+                <div class="col-md-2">
+                    <button class="btn btn-success full-width" ng-click="answerQuestion(4,200)">150-199þús</button>
+                </div>
+                <div class="col-md-2">
+                    <button class="btn btn-success full-width" ng-click="answerQuestion(4,250)">200-250þús</button>
+                </div>
+                <div class="col-md-2">
+                    <button class="btn btn-success full-width" ng-click="answerQuestion(4,300)">Yfir 250þús</button>
+                </div>
+            </div>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div>1. Í hvernig notkun er tölvan helst hugsuð?</div>
-            <div class="row">
-                <div class="col-md-3">
-                    <button class="btn btn-default full-width">Skóla</button>
-                </div>
-                <div class="col-md-3">
-                    <button class="btn btn-default full-width">Vinnu</button>
-                </div>
-                <div class="col-md-3">
-                    <button class="btn btn-default full-width">Heimilis- og skrifstofu</button>
-                </div>
-                <div class="col-md-3">
-                    <button class="btn btn-default full-width">Drepa</button>
-                </div>
-            </div>
+            <center class="display-none" id="result-loader"><i class="fa fa-spinner fa-spin fa-2x question-title"></i></center>
+            <div id="results"></div>
         </div>
     </div>
 </div>
