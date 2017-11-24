@@ -104,7 +104,7 @@ laptops.controller("searchCtrl", ['$scope','$rootScope','$timeout','$routeParams
 
         // Skilar link á mynd
         $scope.getImageLink = function(laptop, size) {
-            return "images/laptops/" + laptop.id + size + ".jpeg";
+            return "images/laptops/" + (laptop.image_exists ? + laptop.id : "no-image")+ size + ".png";
         };
 
         // Velur- eða afvelur hnapp
