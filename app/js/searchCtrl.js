@@ -1,5 +1,5 @@
-laptops.controller("searchCtrl", ['$scope','$rootScope','$timeout','$routeParams','$http',
-    function($scope,$rootScope,$timeout,$routeParams,$http) {
+laptops.controller("searchCtrl", ['$scope','$rootScope','$timeout','$routeParams',
+    function($scope,$rootScope,$timeout,$routeParams) {
         $scope.searchSort = ["price", "price"];
         $rootScope.intel = {};
         $rootScope.amd = {};
