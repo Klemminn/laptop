@@ -59,11 +59,11 @@ laptops.filter('searchFilter', function($rootScope) {
                 // Leitum eftir örgjörva
                 if (!add) continue; else add = (toggled.cpuTypes.length == 0 || $.inArray(item.cpu_type, toggled.cpuTypes) > -1);
                 // Leitum eftir stærð harðs disks
-                if (!add) continue; else add = (item.hdd_capacity >= Number($rootScope.hddLower) && item.hdd_capacity <= Number($rootScope.hddHigher));
+                if (!add) continue; else add = (item.hdd1_capacity >= Number($rootScope.hddLower) && item.hdd1_capacity <= Number($rootScope.hddHigher));
                 // Leitum eftir upplausn
                 if (!add) continue; else add = (item.resolutionIndex >= $rootScope.resolutionLowerIndex && item.resolutionIndex <= $rootScope.resolutionHigherIndex);
                 // Leitum eftir týpu af hörðum disk
-                if (!add) continue; else add = (toggled.hdd_types.length == 0 || $.inArray(item.hdd_type, toggled.hdd_types) > -1);
+                if (!add) continue; else add = (toggled.hdd_types.length == 0 || $.inArray(item.hdd1_type, toggled.hdd_types) > -1);
                 // Leitum eftir skjákorti
                 if (!add) continue; else add = (toggled.gpu_vendors.length == 0 || $.inArray(item.gpu_vendor, toggled.gpu_vendors) > -1);
                 // Leitum eftir vinnsluminni
