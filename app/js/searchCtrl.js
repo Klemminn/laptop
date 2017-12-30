@@ -49,7 +49,7 @@ laptops.controller("searchCtrl", ['$scope','$rootScope','$timeout','$routeParams
         // Opnar modal glugga með upplýsingum um staka fartölvu
         $scope.showLaptop = function(laptop) {
             laptop.largeImage = $scope.getImageLink(laptop,'large');
-            laptop.disk = $scope.getDiskText(laptop.hdd_capacity, laptop.hdd_type);
+            laptop.disk = $scope.getDiskText(laptop);
             $rootScope.openModal('laptopModal','lg',laptop);
         };
 
@@ -60,7 +60,7 @@ laptops.controller("searchCtrl", ['$scope','$rootScope','$timeout','$routeParams
                 laptop = $rootScope.laptops[i];
                 if (laptop.compare) {
                     laptop.largeImage = $scope.getImageLink(laptop,'large');
-                    laptop.disk = $scope.getDiskText(laptop.hdd_capacity, laptop.hdd_type);
+                    laptop.disk = $scope.getDiskText(laptop);
                     $rootScope.laptopsToCompare.push(laptop);
                 }
             }
@@ -98,8 +98,13 @@ laptops.controller("searchCtrl", ['$scope','$rootScope','$timeout','$routeParams
         };
 
         // Umbreytir GB í TB ef þess er þörf
-        $scope.getDiskText = function(capacity, type) {
-            return ((capacity >= 1000) ? capacity/1000 + "TB " : capacity + "GB ") + type;
+        $scope.getDiskText = function(laptop) {
+            var getText = function(size) { return (size >= 1000) ? size/1000 + "TB " : size + "GB " };
+            var str = getText(laptop.hdd1_capacity) + laptop.hdd1_type;
+            if (laptop.hdd2_capacity) {
+                str += " +\n" + getText(laptop.hdd2_capacity) + laptop.hdd2_type;
+            }
+            return str;
         };
 
         // Skilar link á mynd
@@ -154,7 +159,7 @@ laptops.controller("searchCtrl", ['$scope','$rootScope','$timeout','$routeParams
                 $rootScope.hddLower = values[0];
                 $rootScope.hddHigher = values[1];
             }, 1);
-            hddLabels[handle].innerHTML = $scope.getDiskText(Math.round(values[handle]),"");
+            hddLabels[handle].innerHTML = $scope.getDiskText({ 'hdd1_capacity': Math.round(values[handle]), 'hdd1_type': '' });
         });
 
         // Vinnsluminnis slider

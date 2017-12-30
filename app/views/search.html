@@ -183,6 +183,7 @@
                             <th ng-click="changeSort('ram')" ng-class="{underline: checkSort('ram')}">Minni</th>
                             <th ng-click="changeSort('hdd_capacity')" ng-class="{underline: checkSort('hdd_capacity')}">Diskur</th>
                             <th ng-click="changeSort('gpu')" ng-class="{underline: checkSort('gpu_vendor')}">Skjákort</th>
+                            <th ng-click="changeSort('weight')" ng-class="{underline: checkSort('weight')}">Þyngd</th>
                             <th ng-click="changeSort('store')" ng-class="{underline: checkSort('store')}">Verslun</th>
                             <th ng-click="changeSort('price')" ng-class="{underline: checkSort('price')}">Verð</th>
                         </tr>
@@ -191,15 +192,16 @@
                         <tr ng-repeat="laptop in filteredLaptops = (laptops | searchFilter | filter:textFilter) | orderBy:searchSort | limitTo:resultLimit">
                             <td><input ng-disabled="numberToCompare>=5 && !laptop.compare" type="checkbox" ng-model="laptop.compare" ng-change="countComparison(laptop.compare)" class="big-checkbox"/></td>
                             <td ng-click="showLaptop(laptop)" style="cursor:pointer"><div style="background-color: white"><center><img ng-if="$index < resultLimit" height="30px" ng-src="{{getImageLink(laptop,'small')}}"></center></div></td>
-                            <td><a href="{{laptop.url}}" ng-click="sendAnalyticsEvent('outbound','click',laptop.url)" target="_blank" title="{{laptop.description}}">{{laptop.description | limitText:35}}</a></td>
-                            <td>{{laptop.display_size}}"</td>
-                            <td>{{laptop.display_resolution}}</td>
-                            <td>{{laptop.cpu_vendor}} {{laptop.cpu_model}}</td>
-                            <td>{{laptop.ram}}GB</td>
-                            <td>{{getDiskText(laptop.hdd1_capacity, laptop.hdd1_type)}}</td>
-                            <td>{{laptop.gpu_vendor}} {{laptop.gpu_model}}</td>
-                            <td>{{laptop.store}}</td>
-                            <td>{{laptop.price | thousandSeparator}}kr.</td>
+                            <td><a href="{{ laptop.url }}" ng-click="sendAnalyticsEvent('outbound','click',laptop.url)" target="_blank" title="{{laptop.description}}">{{laptop.description | limitText:35}}</a></td>
+                            <td>{{ laptop.display_size | comma }}"</td>
+                            <td>{{ laptop.display_resolution }}</td>
+                            <td>{{ laptop.cpu_vendor }} {{ laptop.cpu_model }}</td>
+                            <td>{{ laptop.ram}}GB</td>
+                            <td><span style="white-space: pre-line">{{ getDiskText(laptop) }}</span></td>
+                            <td>{{ laptop.gpu_vendor }} {{ laptop.gpu_model }}</td>
+                            <td>{{ laptop.weight | comma }} kg</td>
+                            <td>{{ laptop.store }}</td>
+                            <td>{{ laptop.price | thousandSeparator }}kr.</td>
                         </tr>
                         </tbody>
                     </table>
