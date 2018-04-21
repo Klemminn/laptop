@@ -4,8 +4,8 @@ laptops.controller("searchCtrl", ['$scope','$rootScope','$timeout','$routeParams
         $rootScope.intel = {};
         $rootScope.amd = {};
         $rootScope.sizes = [[10],[12],[13],[14],[15],[17]];
-        $rootScope.intelCpuTypes = [["Atom"],["Celeron"],["Pentium"],["Core M"],["i3"],["i5"],["i7"],["Xeon"]];
-        $rootScope.amdCpuTypes = [["FX"],["E2"],["E6"],["A4"],["A6"],["A8"],["A10"]];
+        $rootScope.intelCpuTypes = [["Celeron"],["Pentium"],["Core M"],["i3"],["i5"],["i7"],["Xeon"]];
+        $rootScope.amdCpuTypes = [["E1"],["E2"],["A9"],["A10"]];
         $rootScope.cpuTypes = $rootScope.intelCpuTypes.concat($rootScope.amdCpuTypes);
         $rootScope.thisYear = new Date().getFullYear();
         $rootScope.selectedLaptop = $rootScope.laptops[0];
