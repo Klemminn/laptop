@@ -4,9 +4,7 @@ laptops.controller("searchCtrl", ['$scope','$rootScope','$timeout','$routeParams
         $rootScope.intel = {};
         $rootScope.amd = {};
         $rootScope.sizes = [[10],[12],[13],[14],[15],[17]];
-        $rootScope.intelCpuTypes = [["Celeron"],["Pentium"],["Core M"],["i3"],["i5"],["i7"],["Xeon"]];
-        $rootScope.amdCpuTypes = [["E1"],["E2"],["A9"],["A10"]];
-        $rootScope.cpuTypes = $rootScope.intelCpuTypes.concat($rootScope.amdCpuTypes);
+        $rootScope.cpuTypes = $rootScope.intel_cpu_types.concat($rootScope.amd_cpu_types);
         $rootScope.thisYear = new Date().getFullYear();
         $rootScope.selectedLaptop = $rootScope.laptops[0];
         $rootScope.numberToCompare = 0;
@@ -117,8 +115,8 @@ laptops.controller("searchCtrl", ['$scope','$rootScope','$timeout','$routeParams
             $scope.filterLink = "";
             if (item == 'intel' || item == 'amd') {
                 $rootScope[item].toggled = $rootScope[item].toggled != true;
-                for (var i = 0; i < $rootScope[item + "CpuTypes"].length; i++) {
-                    $rootScope[item + "CpuTypes"][i].toggled = $rootScope[item].toggled;
+                for (var i = 0; i < $rootScope[item + "_cpu_types"].length; i++) {
+                    $rootScope[item + "_cpu_types"][i].toggled = $rootScope[item].toggled;
                 }
             } else {
                 if (cpuVendor && $rootScope[cpuVendor].toggled && item.toggled) {
@@ -298,7 +296,7 @@ laptops.controller("searchCtrl", ['$scope','$rootScope','$timeout','$routeParams
             };
             //var link = location.origin + "/#/search?";
             var link = "http://laptop.is/#/search?";
-            var allCategories = ['amdCpuTypes','intelCpuTypes','brands','stores','sizes','hdd_types','gpu_vendors','display_resolutions'];
+            var allCategories = ['amd_cpu_types','intel_cpu_types','brands','stores','sizes','hdd_types','gpu_vendors','display_resolutions'];
             var category;
             var selected;
             for (var i = 0; i < allCategories.length; i++) {
