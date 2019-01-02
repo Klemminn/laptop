@@ -18,7 +18,7 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <h4 ng-click="toggleCollapse('#byVendor')" class="toCollapse">Framleiðandi<i class="fa fa-info-circle" ng-click="getInfo('vendor')"></i></h4>
+                    <h4 ng-click="toggleCollapse('#byVendor')" class="toCollapse">Framleiðandi <i class="fa fa-info-circle" ng-click="getInfo('vendor')"></i></h4>
                     <div id="byVendor" class="row collapse in">
                         <div class="col-md-12">
                             <button class="btn btn-default" style="display: inline-block; width: 7em; margin: auto 0.4em 0.4em auto"
@@ -31,7 +31,7 @@
                     </div>
                 </div>
             </div>
-            <h4 ng-click="toggleCollapse('#bySize')" class="toCollapse">Skjástærð<i class="fa fa-info-circle" ng-click="getInfo('size')"></i></h4>
+            <h4 ng-click="toggleCollapse('#bySize')" class="toCollapse">Skjástærð <i class="fa fa-info-circle" ng-click="getInfo('size')"></i></h4>
             <div id="bySize" class="collapse in">
                 <button ng-repeat="size in sizes" class="btn btn-default" style="display: inline-block; width: 5.65em; margin: auto 0.4em 0.4em auto"
                         ng-class="{'active toggled': size.toggled}"
@@ -39,7 +39,7 @@
                     {{size[0]}}"
                 </button>
             </div>
-            <h4 ng-click="toggleCollapse('#byResolution')" class="toCollapse">Upplausn<i class="fa fa-info-circle" ng-click="getInfo('resolution')"></i></h4>
+            <h4 ng-click="toggleCollapse('#byResolution')" class="toCollapse">Upplausn <i class="fa fa-info-circle" ng-click="getInfo('resolution')"></i></h4>
             <div id="byResolution" class="row collapse in">
                 <div class="col-md-3 col-xs-3">
                     <span id="resolution-lower" class="pull-right"></span>
@@ -51,7 +51,7 @@
                     <span id="resolution-higher" class="pull-left"></span>
                 </div>
             </div>
-            <h4 ng-click="toggleCollapse('.byCPU')" class="toCollapse">Örgjörvi<i class="fa fa-info-circle" ng-click="getInfo('cpu')"></i></h4>
+            <h4 ng-click="toggleCollapse('.byCPU')" class="toCollapse">Örgjörvi <i class="fa fa-info-circle" ng-click="getInfo('cpu')"></i></h4>
             <div class="collapse in byCPU">
                 <button class="btn btn-default" style="display: inline-block; width: 100%; margin-bottom: 0.4em"
                         ng-class="{'active toggled': intel.toggled}"
@@ -76,7 +76,7 @@
                     {{type[0]}}
                 </button>
             </div>
-            <h4 ng-click="toggleCollapse('.byHDD')" class="toCollapse">Harður diskur<i class="fa fa-info-circle" ng-click="getInfo('disk')"></i></h4>
+            <h4 ng-click="toggleCollapse('.byHDD')" class="toCollapse">Harður diskur <i class="fa fa-info-circle" ng-click="getInfo('disk')"></i></h4>
             <div class="row">
                 <div ng-show="hdd_types.length > 1" class="col-md-6">
                     <div class="collapse in byHDD">
@@ -103,7 +103,7 @@
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <h4 ng-click="toggleCollapse('#byGpu')" class="toCollapse">Skjákort<i class="fa fa-info-circle" ng-click="getInfo('gpu')"></i></h4>
+                    <h4 ng-click="toggleCollapse('#byGpu')" class="toCollapse">Skjákort <i class="fa fa-info-circle" ng-click="getInfo('gpu')"></i></h4>
                     <button ng-repeat="vendor in gpu_vendors" class="btn btn-default" style="display: inline-block; width: 30%; margin-right: 0.3em"
                             ng-class="{'active toggled': vendor.toggled}"
                             ng-click="toggle(vendor)">
@@ -111,7 +111,7 @@
                     </button>
                 </div>
                 <div class="col-md-6">
-                    <h4 ng-click="toggleCollapse('#byRam')" class="toCollapse">Vinnsluminni<i class="fa fa-info-circle" ng-click="getInfo('ram')"></i></h4>
+                    <h4 ng-click="toggleCollapse('#byRam')" class="toCollapse">Vinnsluminni <i class="fa fa-info-circle" ng-click="getInfo('ram')"></i></h4>
                     <div id="byRam" class="row collapse in" style="padding-top: 0.4em">
                         <div class="col-md-3 col-xs-3">
                             <span id="ram-lower" class="pull-right"></span>
