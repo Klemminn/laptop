@@ -10,8 +10,8 @@ laptops.controller("searchCtrl", ['$scope','$rootScope','$timeout','$routeParams
         $rootScope.numberToCompare = 0;
         $scope.resultLimit = 50;
         $scope.textFilter = {description: ""};
+        var allCategories = ['cpuTypes','brands','stores','sizes','hdd_types','gpu_vendors','display_resolutions'];
 
-        var allCategories = ['amdCpuTypes','intelCpuTypes','brands','stores','sizes','hdd_types','gpu_vendors','display_resolutions'];
         new Clipboard('#clipboardButton');
 
         $scope.sendAnalyticsEvent = function(category,action,label) {
@@ -32,11 +32,11 @@ laptops.controller("searchCtrl", ['$scope','$rootScope','$timeout','$routeParams
         };
 
         $scope.clearFilter = function() {
-            for (var i = 0; i < allCategories.length; i++) {
-                for (var j = 0; j < $rootScope[allCategories[i]].length; j++) {
-                    $rootScope[allCategories[i]][j].toggled = false;
-                }
-            }
+            allCategories.forEach((category) => {
+                $rootScope[category].forEach((item) => {
+                    item.toggled = false;
+                })
+            })
             resolutionSlider.noUiSlider.set([0,$rootScope.display_resolutions.length-1]);
             ramSlider.noUiSlider.set([ramRange.min, ramRange.max]);
             hddSlider.noUiSlider.set([hddRange.min, hddRange.max]);
@@ -296,7 +296,7 @@ laptops.controller("searchCtrl", ['$scope','$rootScope','$timeout','$routeParams
             };
             //var link = location.origin + "/#/search?";
             var link = "http://laptop.is/#/search?";
-            var allCategories = ['amd_cpu_types','intel_cpu_types','brands','stores','sizes','hdd_types','gpu_vendors','display_resolutions'];
+            
             var category;
             var selected;
             for (var i = 0; i < allCategories.length; i++) {
@@ -321,25 +321,11 @@ laptops.controller("searchCtrl", ['$scope','$rootScope','$timeout','$routeParams
             if ($rootScope.resolutionLowerIndex > 0 || $rootScope.resolutionHigherIndex < $rootScope.display_resolutions.length-1) {
                 link = link + getSymbol(link) + "resolution=" + $rootScope.display_resolutions[$rootScope.resolutionLowerIndex][0] + "," + $rootScope.display_resolutions[$rootScope.resolutionHigherIndex][0];
             }
-            var textFilter = document.getElementById('textFilter').value;
             if ($scope.textFilter.description.length > 0) {
                 link = link + getSymbol(link) + "description=" + $scope.textFilter.description;
             }
             $scope.longFilterLink = link;
-
-            // Sækjum styttra URL frá
-            gapi.client.setApiKey('AIzaSyAO-_WMv7v_ZD3bJbD6ILB0vh4kMaSJjR4');
-            gapi.client.load('urlshortener', 'v1').then(function() {
-                function useResponse(response) {
-                    $timeout(function() {
-                        $scope.filterLink = response.id;
-                    },1);
-                }
-                var request = gapi.client.urlshortener.url.insert({
-                    'longUrl': link
-                });
-                request.execute(useResponse);
-            });
+            $scope.filterLink = link;
         };
 
         // Texti fyrir modal glugga v. eiginleika.
